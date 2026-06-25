@@ -63,6 +63,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
 .tag-group { display:flex; flex-wrap:wrap; gap:6px; }
 .tag { padding:6px 14px; background:#fff; border:1px solid var(--border); border-radius:20px; font-size:13px; cursor:pointer; transition:all 0.15s; user-select:none; }
 .tag.selected { background:var(--navy); color:#fff; border-color:var(--navy); }
+
+/* ===== Option Buttons (replaces select) ===== */
+.opt-group { display:flex; flex-wrap:wrap; gap:6px; }
+.opt-btn { padding:8px 16px; background:#fff; border:1.5px solid var(--border); border-radius:20px; font-size:13px; cursor:pointer; transition:all 0.15s; user-select:none; text-align:center; }
+.opt-btn:hover { border-color:var(--steel); }
+.opt-btn.selected { background:var(--navy); color:#fff; border-color:var(--navy); }
+.opt-btn.skip-btn { color:var(--text-light); opacity:0.7; }
+.opt-btn.skip-btn.selected { background:var(--steel); color:#fff; border-color:var(--steel); opacity:1; }
+
+/* ===== GPA Slider ===== */
+.slider-wrap { display:flex; align-items:center; gap:12px; }
+.slider-wrap input[type=range] { flex:1; -webkit-appearance:none; appearance:none; height:6px; border-radius:3px; background:var(--border); outline:none; }
+.slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:24px; height:24px; border-radius:50%; background:var(--navy); cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+.slider-value { font-size:20px; font-weight:700; color:var(--navy); min-width:42px; text-align:center; }
+
+.required-badge { display:inline-block; font-size:10px; background:var(--red); color:#fff; padding:1px 6px; border-radius:8px; margin-left:6px; vertical-align:middle; }
+.required-badge { display:inline-block; font-size:10px; background:var(--border); color:var(--text-light); padding:1px 6px; border-radius:8px; margin-left:6px; vertical-align:middle; }
+
 .input-error { border-color:var(--red) !important; }
 
 .btn { display:inline-flex; align-items:center; justify-content:center; padding:10px 24px; border-radius:8px; font-size:14px; font-weight:600; border:none; cursor:pointer; transition:all 0.15s; }
@@ -202,7 +220,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
   <div class="home-brand">睿顺国际 · 留学罗盘</div>
 </div>
 
-<!-- ========== STEP PAGES ========== -->
 <div id="page-step1" class="page">
   <div class="topbar"><span class="back" onclick="goHome()">←</span><span class="logo">留学罗盘</span></div>
   <div class="step-container">
@@ -212,28 +229,60 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
     </div>
     <div class="step-progress"><span class="done"></span><span class="current"></span><span></span><span></span><span></span></div>
     <div class="form-group">
-      <label>GPA 区间</label>
-      <p class="hint">加权/未加权均可，选取更有利的值</p>
-      <select id="s1-gpa"><option value="">请选择</option><option value="4.0">4.0 / 满分</option><option value="3.9">3.8-3.9</option><option value="3.7">3.5-3.7</option><option value="3.3">3.0-3.4</option><option value="2.8">2.5-2.9</option><option value="2.3">2.0-2.4</option><option value="skip">跳过/未确定</option></select>
+      <label>GPA <span class="required-badge">必选</span></label>
+      <p class="hint">加权/未加权均可，拖动滑条选择</p>
+      <div class="slider-wrap">
+        <span style="font-size:12px;color:var(--text-light);">2.0</span>
+        <input type="range" id="s1-gpa" min="20" max="40" value="0" step="1" oninput="updateGpaSlider(this)">
+        <span style="font-size:12px;color:var(--text-light);">4.0</span>
+        <span class="slider-value" id="s1-gpa-val">--</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>课程体系</label>
+      <label>课程体系 <span class="required-badge">必选</span></label>
       <p class="hint">你就读的高中课程类型</p>
-      <select id="s1-curriculum"><option value="">请选择</option><option value="ib">IB 全文凭</option><option value="ap5">AP 5门及以上</option><option value="ap34">AP 3-4门</option><option value="ap12">AP 1-2门</option><option value="alevel">A-Level</option><option value="honors">Honors / 荣誉课程</option><option value="regular">普通高中课程</option><option value="skip">跳过/未确定</option></select>
+      <div class="opt-group" id="s1-curriculum">
+        <span class="opt-btn" data-val="ib">IB 全文凭</span>
+        <span class="opt-btn" data-val="ap5">AP 5门及以上</span>
+        <span class="opt-btn" data-val="ap34">AP 3-4门</span>
+        <span class="opt-btn" data-val="ap12">AP 1-2门</span>
+        <span class="opt-btn" data-val="alevel">A-Level</span>
+        <span class="opt-btn" data-val="honors">Honors / 荣誉课程</span>
+        <span class="opt-btn" data-val="regular">普通高中课程</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>标化考试</label>
-      <p class="hint">SAT / ACT 高分区间</p>
-      <select id="s1-test"><option value="">请选择</option><option value="sat1550">SAT 1550+ / ACT 35+</option><option value="sat1500">SAT 1500-1540 / ACT 33-34</option><option value="sat1450">SAT 1450-1490 / ACT 31-32</option><option value="sat1400">SAT 1400-1440 / ACT 29-30</option><option value="sat1350">SAT 1350-1390 / ACT 26-28</option><option value="sat1300">SAT 1300-1340 / ACT 23-25</option><option value="skip">未考/Test-Optional</option></select>
+      <label>标化考试 <span class="required-badge">必选</span></label>
+      <p class="hint">SAT / ACT 高分区间，未考可不选</p>
+      <div class="opt-group" id="s1-test">
+        <span class="opt-btn" data-val="sat1550">SAT 1550+ / ACT 35+</span>
+        <span class="opt-btn" data-val="sat1500">SAT 1500-1540 / ACT 33-34</span>
+        <span class="opt-btn" data-val="sat1450">SAT 1450-1490 / ACT 31-32</span>
+        <span class="opt-btn" data-val="sat1400">SAT 1400-1440 / ACT 29-30</span>
+        <span class="opt-btn" data-val="sat1350">SAT 1350-1390 / ACT 26-28</span>
+        <span class="opt-btn" data-val="sat1300">SAT 1300-1340 / ACT 23-25</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>学术竞赛成果</label>
-      <select id="s1-competition"><option value="">请选择</option><option value="intl_gold">国际级竞赛获奖</option><option value="natl_gold">国家级竞赛获奖</option><option value="state">省级/地区级获奖</option><option value="school">校级获奖</option><option value="participation">有过参赛经历</option><option value="none">无竞赛经历</option><option value="skip">跳过/未确定</option></select>
+      <label>学术竞赛成果 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s1-competition">
+        <span class="opt-btn" data-val="intl_gold">国际级竞赛获奖</span>
+        <span class="opt-btn" data-val="natl_gold">国家级竞赛获奖</span>
+        <span class="opt-btn" data-val="state">省级/地区级获奖</span>
+        <span class="opt-btn" data-val="school">校级获奖</span>
+        <span class="opt-btn" data-val="participation">有过参赛经历</span>
+        <span class="opt-btn" data-val="none">无竞赛经历</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>课程难度自评</label>
+      <label>课程难度自评 <span class="required-badge">必选</span></label>
       <p class="hint">你选择的课程在本校的难度水平</p>
-      <select id="s1-difficulty"><option value="">请选择</option><option value="most">全校最具挑战性的课程组合</option><option value="high">高于大多数同届学生</option><option value="average">与同届平均水平相当</option><option value="low">低于同届平均水平</option><option value="skip">跳过/未确定</option></select>
+      <div class="opt-group" id="s1-difficulty">
+        <span class="opt-btn" data-val="most">全校最具挑战</span>
+        <span class="opt-btn" data-val="high">高于大多数同学</span>
+        <span class="opt-btn" data-val="average">平均水平</span>
+        <span class="opt-btn" data-val="low">低于平均水平</span>
+      </div>
     </div>
   </div>
   <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(1,2)">下一步</button></div>
@@ -245,7 +294,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
     <div class="step-header"><h2>专业好奇心</h2><p class="step-desc">满分 30 分 · 学术热情与深度探索</p></div>
     <div class="step-progress"><span class="done"></span><span class="done"></span><span class="current"></span><span></span><span></span></div>
     <div class="form-group">
-      <label>意向专业方向（可多选）</label>
+      <label>意向专业方向（可多选） <span class="required-badge">必选</span></label>
       <div class="tag-group" id="s2-majors-select">
         <span class="tag" data-val="cs">计算机科学</span>
         <span class="tag" data-val="eng">工程学</span>
@@ -262,21 +311,36 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
       </div>
     </div>
     <div class="form-group">
-      <label>科研/夏校/项目经历</label>
-      <select id="s2-research"><option value="">请选择</option><option value="pub">有论文发表/专利</option><option value="prestige">知名夏校/科研项目</option><option value="local">本地大学/线上科研</option><option value="self">自主项目（个人网站/博客/小项目）</option><option value="none">暂无科研经历</option><option value="skip">跳过/未确定</option></select>
+      <label>科研/夏校/项目经历 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s2-research">
+        <span class="opt-btn" data-val="pub">有论文发表/专利</span>
+        <span class="opt-btn" data-val="prestige">知名夏校/科研项目</span>
+        <span class="opt-btn" data-val="local">本地大学/线上科研</span>
+        <span class="opt-btn" data-val="self">自主项目</span>
+        <span class="opt-btn" data-val="none">暂无科研经历</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>专业自主探索证明</label>
+      <label>专业自主探索证明 <span class="required-badge">必选</span></label>
       <p class="hint">你在课外自主学习和探索专业的深度</p>
-      <select id="s2-exploration"><option value="">请选择</option><option value="deep">深度：有系统性作品（论文/应用/作品集）</option><option value="moderate">中等：有持续自学并有笔记/心得</option><option value="shallow">浅层：有碎片化了解但不够系统</option><option value="none">暂无自主探索</option><option value="skip">跳过/未确定</option></select>
+      <div class="opt-group" id="s2-exploration">
+        <span class="opt-btn" data-val="deep">深度：有系统作品</span>
+        <span class="opt-btn" data-val="moderate">中等：有笔记/心得</span>
+        <span class="opt-btn" data-val="shallow">浅层：碎片化了解</span>
+        <span class="opt-btn" data-val="none">暂无自主探索</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>推荐信（学术方向）</label>
-      <select id="s2-recommendation"><option value="">请选择</option><option value="strong">预期很强：老师非常了解我的学术热情</option><option value="good">预期良好：老师对我有积极印象</option><option value="average">一般：老师能写但可能不够突出</option><option value="skip">跳过/尚未确定推荐人</option></select>
+      <label>推荐信（学术方向） <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s2-recommendation">
+        <span class="opt-btn" data-val="strong">预期很强</span>
+        <span class="opt-btn" data-val="good">预期良好</span>
+        <span class="opt-btn" data-val="average">一般</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>专业深度自述</label>
-      <p class="hint">用一段话描述你对自己意向专业的理解和热情来源（选填）</p>
+      <label>专业深度自述 <span class="required-badge">必选</span></label>
+      <p class="hint">用一段话描述你对自己意向专业的理解和热情来源</p>
       <textarea id="s2-statement" placeholder="例如：我对计算机科学的兴趣源于..." rows="3"></textarea>
     </div>
   </div>
@@ -289,7 +353,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
     <div class="step-header"><h2>社群贡献力</h2><p class="step-desc">满分 25 分 · 你在群体中的领导力与辐射影响</p></div>
     <div class="step-progress"><span class="done"></span><span class="done"></span><span class="done"></span><span class="current"></span><span></span></div>
     <div class="form-group">
-      <label>活动类型（可多选）</label>
+      <label>活动类型（可多选） <span class="required-badge">必选</span></label>
       <div class="tag-group" id="s3-activities-select">
         <span class="tag" data-val="leadership">学生领导</span>
         <span class="tag" data-val="community">社区服务</span>
@@ -303,21 +367,40 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
       </div>
     </div>
     <div class="form-group">
-      <label>主要活动持续年限</label>
-      <select id="s3-duration"><option value="">请选择</option><option value="3plus">3年以上</option><option value="2years">2年</option><option value="1year">1年</option><option value="less1">不足1年</option><option value="skip">跳过/未确定</option></select>
+      <label>主要活动持续年限 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s3-duration">
+        <span class="opt-btn" data-val="3plus">3年以上</span>
+        <span class="opt-btn" data-val="2years">2年</span>
+        <span class="opt-btn" data-val="1year">1年</span>
+        <span class="opt-btn" data-val="less1">不足1年</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>影响力描述</label>
+      <label>影响力描述 <span class="required-badge">必选</span></label>
       <p class="hint">你在活动中的实际贡献和影响范围</p>
-      <select id="s3-impact-desc"><option value="">请选择</option><option value="national">全国/国际性影响力</option><option value="regional">区域性影响力</option><option value="school">校内影响力</option><option value="personal">个人参与为主</option><option value="skip">跳过/未确定</option></select>
+      <div class="opt-group" id="s3-impact-desc">
+        <span class="opt-btn" data-val="national">全国/国际性影响力</span>
+        <span class="opt-btn" data-val="regional">区域性影响力</span>
+        <span class="opt-btn" data-val="school">校内影响力</span>
+        <span class="opt-btn" data-val="personal">个人参与为主</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>领导角色</label>
-      <select id="s3-leadership"><option value="">请选择</option><option value="founder">创始人/组织者</option><option value="president">主席/社长/队长</option><option value="officer">干部/核心成员</option><option value="member">普通成员</option><option value="skip">跳过/未确定</option></select>
+      <label>领导角色 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s3-leadership">
+        <span class="opt-btn" data-val="founder">创始人/组织者</span>
+        <span class="opt-btn" data-val="president">主席/社长/队长</span>
+        <span class="opt-btn" data-val="officer">干部/核心成员</span>
+        <span class="opt-btn" data-val="member">普通成员</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>升学指导推荐信（活动方向）</label>
-      <select id="s3-counselor"><option value="">请选择</option><option value="strong">预期很强：Counselor非常了解我的社群贡献</option><option value="good">预期良好</option><option value="average">一般</option><option value="skip">跳过/未确定</option></select>
+      <label>升学指导推荐信 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s3-counselor">
+        <span class="opt-btn" data-val="strong">预期很强</span>
+        <span class="opt-btn" data-val="good">预期良好</span>
+        <span class="opt-btn" data-val="average">一般</span>
+      </div>
     </div>
   </div>
   <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(3,4)">下一步</button></div>
@@ -329,12 +412,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
     <div class="step-header"><h2>个人特质</h2><p class="step-desc">满分 15 分 · 独一无二的你</p></div>
     <div class="step-progress"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="current"></span></div>
     <div class="form-group">
-      <label>成长事件</label>
-      <p class="hint">描述一件对你影响深远的经历（选填）</p>
+      <label>成长事件 <span class="required-badge">必选</span></label>
+      <p class="hint">描述一件对你影响深远的经历</p>
       <textarea id="s4-story" placeholder="例如：我曾在..." rows="3"></textarea>
     </div>
     <div class="form-group">
-      <label>自我认知标签（可多选）</label>
+      <label>自我认知标签（可多选） <span class="required-badge">必选</span></label>
       <div class="tag-group" id="s4-traits-select">
         <span class="tag" data-val="resilient">坚韧不拔</span>
         <span class="tag" data-val="creative">创造力强</span>
@@ -348,16 +431,32 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
       </div>
     </div>
     <div class="form-group">
-      <label>家庭背景</label>
-      <select id="s4-background"><option value="">请选择</option><option value="firstgen">第一代大学生</option><option value="immigrant">移民家庭</option><option value="single">单亲家庭</option><option value="lowincome">低收入家庭</option><option value="ordinary">普通中产家庭</option><option value="privileged">资源优势家庭</option><option value="skip">跳过/不透露</option></select>
+      <label>家庭背景 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s4-background">
+        <span class="opt-btn" data-val="firstgen">第一代大学生</span>
+        <span class="opt-btn" data-val="immigrant">移民家庭</span>
+        <span class="opt-btn" data-val="single">单亲家庭</span>
+        <span class="opt-btn" data-val="lowincome">低收入家庭</span>
+        <span class="opt-btn" data-val="ordinary">普通中产家庭</span>
+        <span class="opt-btn" data-val="privileged">资源优势家庭</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>语言能力</label>
-      <select id="s4-language"><option value="">请选择</option><option value="bilingual">双语母语水平</option><option value="fluent">流利英语</option><option value="good">良好英语</option><option value="basic">基础英语</option><option value="skip">跳过/未确定</option></select>
+      <label>语言能力 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s4-language">
+        <span class="opt-btn" data-val="bilingual">双语母语水平</span>
+        <span class="opt-btn" data-val="fluent">流利英语</span>
+        <span class="opt-btn" data-val="good">良好英语</span>
+        <span class="opt-btn" data-val="basic">基础英语</span>
+      </div>
     </div>
     <div class="form-group">
-      <label>面试信心</label>
-      <select id="s4-interview"><option value="">请选择</option><option value="confident">非常自信</option><option value="ok">还算从容</option><option value="nervous">有些紧张</option><option value="skip">跳过/未确定</option></select>
+      <label>面试信心 <span class="required-badge">必选</span></label>
+      <div class="opt-group" id="s4-interview">
+        <span class="opt-btn" data-val="confident">非常自信</span>
+        <span class="opt-btn" data-val="ok">还算从容</span>
+        <span class="opt-btn" data-val="nervous">有些紧张</span>
+      </div>
     </div>
   </div>
   <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(4,5)">下一步</button></div>
@@ -473,56 +572,93 @@ function goStep(n) { showPage('step' + n); }
 function prevStep(n) { showPage('step' + n); }
 function startAssessment() { goStep(1); }
 
-// ==================== TAG TOGGLES ====================
-document.querySelectorAll('.tag-group').forEach(group => {
-  group.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('tag')) return;
-    const tag = e.target;
-    const val = tag.dataset.val;
-    const isToggle = group.id.includes('select') && !group.dataset.single;
-    if (isToggle) tag.classList.toggle('selected');
-    else {
-      group.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
-      tag.classList.add('selected');
-    }
-  });
+// ==================== OPTION BUTTONS (opt-group) ====================
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.opt-btn');
+  if (!btn) return;
+  const group = btn.parentElement;
+  group.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
 });
+
+// ==================== TAG TOGGLES ====================
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('tag')) return;
+  e.target.classList.toggle('selected');
+});
+
+function getSelectedVal(containerId) {
+  const el = document.getElementById(containerId);
+  const sel = el.querySelector('.opt-btn.selected');
+  return sel ? sel.dataset.val : '';
+}
 
 function getSelectedTags(containerId) {
   const tags = document.querySelectorAll('#' + containerId + ' .tag.selected');
   return Array.from(tags).map(t => t.dataset.val);
 }
 
+// ==================== GPA SLIDER ====================
+function updateGpaSlider(slider) {
+  const v = parseInt(slider.value) / 10;
+  document.getElementById('s1-gpa-val').textContent = v.toFixed(1);
+}
+
+// GPA slider (2.0-4.0) -> bucket string for scoring
+function gpaToBucket(v) {
+  if (v >= 3.8) return '4.0';
+  if (v >= 3.5) return '3.7';
+  if (v >= 3.0) return '3.3';
+  if (v >= 2.5) return '2.8';
+  return '2.3';
+}
+
 // ==================== STEP SUBMISSION ====================
 function submitStep(stepNum, nextStep) {
   if (stepNum === 1) {
-    store.gpa = document.getElementById('s1-gpa').value;
-    store.curriculum = document.getElementById('s1-curriculum').value;
-    store.test = document.getElementById('s1-test').value;
-    store.competition = document.getElementById('s1-competition').value;
-    store.difficulty = document.getElementById('s1-difficulty').value;
-    if (!store.gpa) { alert('请选择GPA区间或跳过'); return; }
+    const gpaRaw = parseInt(document.getElementById('s1-gpa').value);
+    store.gpa = gpaRaw > 0 ? gpaToBucket(gpaRaw / 10) : '';
+    store.curriculum = getSelectedVal('s1-curriculum');
+    store.test = getSelectedVal('s1-test');
+    store.competition = getSelectedVal('s1-competition');
+    store.difficulty = getSelectedVal('s1-difficulty');
+    if (!store.gpa) { alert('请拖动滑条选择GPA'); return; }
+    if (!store.curriculum) { alert('请选择课程体系'); return; }
+    if (!store.test) { alert('请选择标化考试成绩'); return; }
+    if (!store.competition) { alert('请选择学术竞赛成果'); return; }
+    if (!store.difficulty) { alert('请选择课程难度自评'); return; }
   } else if (stepNum === 2) {
     store.majors = getSelectedTags('s2-majors-select');
-    store.research = document.getElementById('s2-research').value;
-    store.exploration = document.getElementById('s2-exploration').value;
-    store.recommendation = document.getElementById('s2-recommendation').value;
-    store.statement = document.getElementById('s2-statement').value || '';
-    if (store.majors.length === 0) { alert('请至少选择或跳过专业方向'); return; }
+    store.research = getSelectedVal('s2-research');
+    store.exploration = getSelectedVal('s2-exploration');
+    store.recommendation = getSelectedVal('s2-recommendation');
+    store.statement = document.getElementById('s2-statement').value;
+    if (store.majors.length === 0) { alert('请至少选择一个意向专业方向'); return; }
+    if (!store.research) { alert('请选择科研/夏校/项目经历'); return; }
+    if (!store.exploration) { alert('请选择专业自主探索证明'); return; }
+    if (!store.recommendation) { alert('请选择推荐信（学术方向）'); return; }
   } else if (stepNum === 3) {
     store.activities = getSelectedTags('s3-activities-select');
-    store.duration = document.getElementById('s3-duration').value;
-    store.impactDesc = document.getElementById('s3-impact-desc').value;
-    store.leadership = document.getElementById('s3-leadership').value;
-    store.counselor = document.getElementById('s3-counselor').value;
-    if (store.activities.length === 0) { alert('请至少选择或跳过活动类型'); return; }
+    store.duration = getSelectedVal('s3-duration');
+    store.impactDesc = getSelectedVal('s3-impact-desc');
+    store.leadership = getSelectedVal('s3-leadership');
+    store.counselor = getSelectedVal('s3-counselor');
+    if (store.activities.length === 0) { alert('请至少选择一个活动类型'); return; }
+    if (!store.duration) { alert('请选择主要活动持续年限'); return; }
+    if (!store.impactDesc) { alert('请选择影响力描述'); return; }
+    if (!store.leadership) { alert('请选择领导角色'); return; }
+    if (!store.counselor) { alert('请选择升学指导推荐信'); return; }
   } else if (stepNum === 4) {
-    store.story = document.getElementById('s4-story').value || '';
+    store.story = document.getElementById('s4-story').value;
     store.traits = getSelectedTags('s4-traits-select');
-    store.background = document.getElementById('s4-background').value;
-    store.language = document.getElementById('s4-language').value;
-    store.interview = document.getElementById('s4-interview').value;
-    if (store.traits.length === 0) { alert('请至少选择或跳过自我认知标签'); return; }
+    store.background = getSelectedVal('s4-background');
+    store.language = getSelectedVal('s4-language');
+    store.interview = getSelectedVal('s4-interview');
+    if (!store.story) { alert('请填写成长事件'); return; }
+    if (store.traits.length === 0) { alert('请至少选择一个自我认知标签'); return; }
+    if (!store.background) { alert('请选择家庭背景'); return; }
+    if (!store.language) { alert('请选择语言能力'); return; }
+    if (!store.interview) { alert('请选择面试信心'); return; }
   }
   showPage('step' + nextStep);
 }
