@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>睿顺·留学罗盘</title>
+<style>
+:root {
+  --navy: #1B2A4A;
+  --steel: #3A5078;
+  --gold: #C9A96E;
+  --warm-white: #F7F6F3;
+  --border: #E8E5DF;
+  --text: #2C2C2C;
+  --text-light: #999;
+  --green: #3A7D5A;
+  --red: #D96C6C;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: var(--warm-white); color: var(--text); line-height:1.6; }
+
+/* ===== Page System ===== */
+.page { display:none; min-height:100vh; }
+.page.active { display:block; }
+
+/* ===== Top Bar ===== */
+.topbar { background: var(--navy); color: #fff; padding: 14px 20px; display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:100; }
+.topbar .logo { font-size:18px; font-weight:700; letter-spacing:1px; }
+.topbar .back { cursor:pointer; font-size:20px; line-height:1; padding:4px 8px; }
+
+/* ===== Home Page ===== */
+.home-hero { background:linear-gradient(135deg, var(--navy), var(--steel)); color:#fff; text-align:center; padding:50px 24px 40px; }
+.home-hero h1 { font-size:32px; letter-spacing:4px; margin-bottom:8px; }
+.home-hero .subtitle { font-size:14px; opacity:0.8; }
+.home-steps { padding:20px 16px; display:flex; flex-direction:column; gap:10px; }
+.home-step { display:flex; align-items:center; gap:12px; padding:14px 16px; background:#fff; border-radius:10px; cursor:pointer; transition:transform 0.15s; }
+.home-step:active { transform:scale(0.98); }
+.home-step .step-num { width:36px; height:36px; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+.home-step .step-info { flex:1; }
+.home-step .step-name { font-size:15px; font-weight:600; }
+.home-step .step-score { font-size:12px; color:var(--text-light); }
+.home-value { margin:0 16px 16px; padding:16px; background:#fff; border-radius:10px; border-left:3px solid var(--gold); }
+.home-value p { font-size:13px; color:var(--text-light); margin-bottom:4px; }
+.home-value .value-highlight { color:var(--navy); font-weight:600; }
+.home-brand { text-align:center; padding:20px; color:var(--text-light); font-size:12px; }
+
+/* ===== Step Pages ===== */
+.step-container { max-width:500px; margin:0 auto; padding:20px 16px 100px; }
+.step-header { text-align:center; padding:24px 0 16px; }
+.step-header h2 { font-size:22px; color:var(--navy); margin-bottom:4px; }
+.step-header .step-desc { font-size:13px; color:var(--text-light); }
+.step-progress { display:flex; gap:4px; justify-content:center; margin-bottom:20px; }
+.step-progress span { width:40px; height:3px; border-radius:2px; background:var(--border); }
+.step-progress span.done { background:var(--gold); }
+.step-progress span.current { background:var(--navy); }
+
+.form-group { margin-bottom:20px; }
+.form-group label { display:block; font-size:14px; font-weight:600; color:var(--navy); margin-bottom:6px; }
+.form-group .hint { font-size:12px; color:var(--text-light); margin-bottom:6px; }
+.form-group select, .form-group textarea { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:#fff; font-family:inherit; }
+.form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--gold); }
+.form-group textarea { resize:vertical; min-height:80px; }
+.tag-group { display:flex; flex-wrap:wrap; gap:6px; }
+.tag { padding:6px 14px; background:#fff; border:1px solid var(--border); border-radius:20px; font-size:13px; cursor:pointer; transition:all 0.15s; user-select:none; }
+.tag.selected { background:var(--navy); color:#fff; border-color:var(--navy); }
+.input-error { border-color:var(--red) !important; }
+
+.btn { display:inline-flex; align-items:center; justify-content:center; padding:10px 24px; border-radius:8px; font-size:14px; font-weight:600; border:none; cursor:pointer; transition:all 0.15s; }
+.btn-primary { background:var(--navy); color:#fff; width:100%; }
+.btn-primary:hover { background:var(--steel); }
+.btn-gold { background:var(--gold); color:#fff; width:100%; }
+.btn-gold:hover { opacity:0.9; }
+.btn-outline { background:#fff; color:var(--navy); border:1px solid var(--navy); width:100%; }
+
+.step-bottom { position:fixed; bottom:0; left:0; right:0; padding:14px 16px; background:var(--warm-white); border-top:1px solid var(--border); max-width:500px; margin:0 auto; }
+
+/* ===== Report Page ===== */
+.report-header { background:linear-gradient(135deg, var(--navy), var(--steel)); color:#fff; text-align:center; padding:36px 20px 28px; }
+.report-header .total-score { font-size:64px; font-weight:800; line-height:1; }
+.report-header .total-label { font-size:13px; opacity:0.7; margin-top:4px; }
+
+.report-nav { display:flex; overflow-x:auto; gap:0; border-bottom:1px solid var(--border); background:#fff; position:sticky; top:0; z-index:50; }
+.report-nav span { padding:12px 16px; font-size:13px; white-space:nowrap; cursor:pointer; color:var(--text-light); border-bottom:2px solid transparent; }
+.report-nav span.nav-active { color:var(--navy); border-bottom-color:var(--navy); font-weight:600; }
+
+.report-section { padding:20px 16px; max-width:500px; margin:0 auto; }
+.report-section h3 { font-size:16px; color:var(--navy); margin-bottom:12px; }
+
+.canvas-wrap { text-align:center; margin:16px auto; }
+.canvas-wrap canvas { max-width:100%; }
+
+.scoring-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+.scoring-table th { background:var(--navy); color:#fff; padding:8px; text-align:left; }
+.scoring-table td { padding:8px; border-bottom:1px solid var(--border); }
+
+.portrait-card { background:#fff; border-radius:10px; padding:20px; text-align:center; margin-bottom:16px; }
+.portrait-card .p-code { font-size:12px; color:var(--gold); letter-spacing:3px; }
+.portrait-card .p-name { font-size:22px; font-weight:700; color:var(--navy); margin:4px 0; }
+.portrait-card .p-tagline { font-size:13px; color:var(--text-light); }
+
+.radar-item { background:#fff; border-radius:8px; padding:12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+.radar-item .ri-name { font-weight:600; color:var(--navy); }
+.radar-item .ri-score { font-size:13px; }
+.radar-item .ri-bar { width:80px; height:6px; border-radius:3px; background:var(--border); overflow:hidden; }
+.radar-item .ri-fill { height:100%; border-radius:3px; }
+.radar-item .ri-level { font-size:12px; padding:2px 8px; border-radius:10px; font-weight:600; }
+.ri-high { background:#E8F5E9; color:#2E7D32; }
+.ri-mid { background:#FFF3E0; color:#E65100; }
+.ri-low { background:#FFEBEE; color:#C62828; }
+.ri-weak { background:#F3E5F5; color:#6A1B9A; }
+
+.school-card { background:#fff; border-radius:10px; padding:16px; margin-bottom:12px; border-left:3px solid var(--gold); }
+.school-card .sc-tier { font-size:10px; background:var(--navy); color:#fff; padding:2px 8px; border-radius:10px; }
+.school-card .sc-name { font-size:16px; font-weight:700; margin:6px 0 2px; }
+.school-card .sc-name-cn { font-size:13px; color:var(--text-light); }
+.school-card .sc-meta { font-size:12px; color:var(--text-light); margin-top:6px; }
+.school-card .sc-keywords { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
+.school-card .sc-keyword { font-size:11px; background:var(--warm-white); padding:2px 8px; border-radius:10px; color:var(--steel); }
+.school-card .sc-reason { font-size:12px; color:var(--text-light); margin-top:6px; }
+.school-card .sc-majors { font-size:12px; margin-top:4px; }
+.school-card .sc-majors strong { color:var(--steel); }
+
+.advice-item { padding:10px 14px; background:#fff; border-radius:8px; margin-bottom:8px; border-left:3px solid var(--steel); font-size:13px; }
+.section-contact { background:linear-gradient(135deg, var(--warm-white), #fff); border:1px solid var(--gold); border-radius:12px; padding:20px; text-align:center; margin-top:20px; }
+.section-contact h4 { color:var(--navy); margin-bottom:8px; }
+
+.expand-panel { background:#fff; border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.expand-header { padding:12px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:14px; }
+.expand-body { display:none; padding:0 16px 16px; }
+.expand-body.open { display:block; }
+
+.footer-brand { text-align:center; padding:24px; color:var(--text-light); font-size:12px; }
+
+/* ===== Responsive ===== */
+@media(min-width:600px) {
+  .step-container, .report-section { max-width:540px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HOME PAGE ========== -->
+<div id="page-home" class="page active">
+  <div class="home-hero">
+    <h1>留学罗盘</h1>
+    <p class="subtitle">招生官视角四维评估体系</p>
+  </div>
+  <div class="home-steps">
+    <div class="home-step" onclick="goStep(1)">
+      <div class="step-num">1</div>
+      <div class="step-info">
+        <div class="step-name">认知天花板</div>
+        <div class="step-score">满分 40 分 · GPA + 课程 + 标化 + 竞赛</div>
+      </div>
+    </div>
+    <div class="home-step" onclick="goStep(2)">
+      <div class="step-num">2</div>
+      <div class="step-info">
+        <div class="step-name">专业好奇心</div>
+        <div class="step-score">满分 30 分 · 专业 + 科研 + 深度自述</div>
+      </div>
+    </div>
+    <div class="home-step" onclick="goStep(3)">
+      <div class="step-num">3</div>
+      <div class="step-info">
+        <div class="step-name">社群贡献力</div>
+        <div class="step-score">满分 25 分 · 活动 + 领导力 + 影响力</div>
+      </div>
+    </div>
+    <div class="home-step" onclick="goStep(4)">
+      <div class="step-num">4</div>
+      <div class="step-info">
+        <div class="step-name">个人特质</div>
+        <div class="step-score">满分 15 分 · 成长故事 + 自我认知</div>
+      </div>
+    </div>
+    <div class="home-step" onclick="goStep(5)">
+      <div class="step-num">5</div>
+      <div class="step-info">
+        <div class="step-name">学校偏好</div>
+        <div class="step-score">定制的选校推荐</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="startAssessment()">开始评估</button>
+  </div>
+  <div class="home-value">
+    <p>招生官在看什么？</p>
+    <p>四维矩阵 · 27种申请者画像 · <span class="value-highlight">301所美国院校数据库</span></p>
+  </div>
+  <div class="home-brand">睿顺国际 · 留学罗盘</div>
+</div>
+
+<!-- ========== STEP PAGES ========== -->
+<div id="page-step1" class="page">
+  <div class="topbar"><span class="back" onclick="goHome()">←</span><span class="logo">留学罗盘</span></div>
+  <div class="step-container">
+    <div class="step-header">
+      <h2>认知天花板</h2>
+      <p class="step-desc">满分 40 分 · 评估你的学术硬实力上限</p>
+    </div>
+    <div class="step-progress"><span class="done"></span><span class="current"></span><span></span><span></span><span></span></div>
+    <div class="form-group">
+      <label>GPA 区间</label>
+      <p class="hint">加权/未加权均可，选取更有利的值</p>
+      <select id="s1-gpa"><option value="">请选择</option><option value="4.0">4.0 / 满分</option><option value="3.9">3.8-3.9</option><option value="3.7">3.5-3.7</option><option value="3.3">3.0-3.4</option><option value="2.8">2.5-2.9</option><option value="2.3">2.0-2.4</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>课程体系</label>
+      <p class="hint">你就读的高中课程类型</p>
+      <select id="s1-curriculum"><option value="">请选择</option><option value="ib">IB 全文凭</option><option value="ap5">AP 5门及以上</option><option value="ap34">AP 3-4门</option><option value="ap12">AP 1-2门</option><option value="alevel">A-Level</option><option value="honors">Honors / 荣誉课程</option><option value="regular">普通高中课程</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>标化考试</label>
+      <p class="hint">SAT / ACT 高分区间</p>
+      <select id="s1-test"><option value="">请选择</option><option value="sat1550">SAT 1550+ / ACT 35+</option><option value="sat1500">SAT 1500-1540 / ACT 33-34</option><option value="sat1450">SAT 1450-1490 / ACT 31-32</option><option value="sat1400">SAT 1400-1440 / ACT 29-30</option><option value="sat1350">SAT 1350-1390 / ACT 26-28</option><option value="sat1300">SAT 1300-1340 / ACT 23-25</option><option value="skip">未考/Test-Optional</option></select>
+    </div>
+    <div class="form-group">
+      <label>学术竞赛成果</label>
+      <select id="s1-competition"><option value="">请选择</option><option value="intl_gold">国际级竞赛获奖</option><option value="natl_gold">国家级竞赛获奖</option><option value="state">省级/地区级获奖</option><option value="school">校级获奖</option><option value="participation">有过参赛经历</option><option value="none">无竞赛经历</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>课程难度自评</label>
+      <p class="hint">你选择的课程在本校的难度水平</p>
+      <select id="s1-difficulty"><option value="">请选择</option><option value="most">全校最具挑战性的课程组合</option><option value="high">高于大多数同届学生</option><option value="average">与同届平均水平相当</option><option value="low">低于同届平均水平</option><option value="skip">跳过/未确定</option></select>
+    </div>
+  </div>
+  <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(1,2)">下一步</button></div>
+</div>
+
+<div id="page-step2" class="page">
+  <div class="topbar"><span class="back" onclick="prevStep(1)">←</span><span class="logo">留学罗盘</span></div>
+  <div class="step-container">
+    <div class="step-header"><h2>专业好奇心</h2><p class="step-desc">满分 30 分 · 学术热情与深度探索</p></div>
+    <div class="step-progress"><span class="done"></span><span class="done"></span><span class="current"></span><span></span><span></span></div>
+    <div class="form-group">
+      <label>意向专业方向（可多选）</label>
+      <div class="tag-group" id="s2-majors-select">
+        <span class="tag" data-val="cs">计算机科学</span>
+        <span class="tag" data-val="eng">工程学</span>
+        <span class="tag" data-val="business">商学/经济</span>
+        <span class="tag" data-val="bio">生物/医学预科</span>
+        <span class="tag" data-val="math">数学/统计</span>
+        <span class="tag" data-val="physics">物理/化学</span>
+        <span class="tag" data-val="arts">艺术/设计</span>
+        <span class="tag" data-val="humanities">人文/社科</span>
+        <span class="tag" data-val="law">法学预科</span>
+        <span class="tag" data-val="edu">教育学</span>
+        <span class="tag" data-val="media">传媒/新闻</span>
+        <span class="tag" data-val="undecided">未确定</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>科研/夏校/项目经历</label>
+      <select id="s2-research"><option value="">请选择</option><option value="pub">有论文发表/专利</option><option value="prestige">知名夏校/科研项目</option><option value="local">本地大学/线上科研</option><option value="self">自主项目（个人网站/博客/小项目）</option><option value="none">暂无科研经历</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>专业自主探索证明</label>
+      <p class="hint">你在课外自主学习和探索专业的深度</p>
+      <select id="s2-exploration"><option value="">请选择</option><option value="deep">深度：有系统性作品（论文/应用/作品集）</option><option value="moderate">中等：有持续自学并有笔记/心得</option><option value="shallow">浅层：有碎片化了解但不够系统</option><option value="none">暂无自主探索</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>推荐信（学术方向）</label>
+      <select id="s2-recommendation"><option value="">请选择</option><option value="strong">预期很强：老师非常了解我的学术热情</option><option value="good">预期良好：老师对我有积极印象</option><option value="average">一般：老师能写但可能不够突出</option><option value="skip">跳过/尚未确定推荐人</option></select>
+    </div>
+    <div class="form-group">
+      <label>专业深度自述</label>
+      <p class="hint">用一段话描述你对自己意向专业的理解和热情来源（选填）</p>
+      <textarea id="s2-statement" placeholder="例如：我对计算机科学的兴趣源于..." rows="3"></textarea>
+    </div>
+  </div>
+  <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(2,3)">下一步</button></div>
+</div>
+
+<div id="page-step3" class="page">
+  <div class="topbar"><span class="back" onclick="prevStep(2)">←</span><span class="logo">留学罗盘</span></div>
+  <div class="step-container">
+    <div class="step-header"><h2>社群贡献力</h2><p class="step-desc">满分 25 分 · 你在群体中的领导力与辐射影响</p></div>
+    <div class="step-progress"><span class="done"></span><span class="done"></span><span class="done"></span><span class="current"></span><span></span></div>
+    <div class="form-group">
+      <label>活动类型（可多选）</label>
+      <div class="tag-group" id="s3-activities-select">
+        <span class="tag" data-val="leadership">学生领导</span>
+        <span class="tag" data-val="community">社区服务</span>
+        <span class="tag" data-val="sports">体育竞技</span>
+        <span class="tag" data-val="arts_club">艺术/音乐社团</span>
+        <span class="tag" data-val="academic">学术社团</span>
+        <span class="tag" data-val="debate">辩论/模联</span>
+        <span class="tag" data-val="entrepreneurship">创业/商业实践</span>
+        <span class="tag" data-val="volunteer">长期志愿/公益</span>
+        <span class="tag" data-val="media_club">校媒/自媒体</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>主要活动持续年限</label>
+      <select id="s3-duration"><option value="">请选择</option><option value="3plus">3年以上</option><option value="2years">2年</option><option value="1year">1年</option><option value="less1">不足1年</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>影响力描述</label>
+      <p class="hint">你在活动中的实际贡献和影响范围</p>
+      <select id="s3-impact-desc"><option value="">请选择</option><option value="national">全国/国际性影响力</option><option value="regional">区域性影响力</option><option value="school">校内影响力</option><option value="personal">个人参与为主</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>领导角色</label>
+      <select id="s3-leadership"><option value="">请选择</option><option value="founder">创始人/组织者</option><option value="president">主席/社长/队长</option><option value="officer">干部/核心成员</option><option value="member">普通成员</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>升学指导推荐信（活动方向）</label>
+      <select id="s3-counselor"><option value="">请选择</option><option value="strong">预期很强：Counselor非常了解我的社群贡献</option><option value="good">预期良好</option><option value="average">一般</option><option value="skip">跳过/未确定</option></select>
+    </div>
+  </div>
+  <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(3,4)">下一步</button></div>
+</div>
+
+<div id="page-step4" class="page">
+  <div class="topbar"><span class="back" onclick="prevStep(3)">←</span><span class="logo">留学罗盘</span></div>
+  <div class="step-container">
+    <div class="step-header"><h2>个人特质</h2><p class="step-desc">满分 15 分 · 独一无二的你</p></div>
+    <div class="step-progress"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="current"></span></div>
+    <div class="form-group">
+      <label>成长事件</label>
+      <p class="hint">描述一件对你影响深远的经历（选填）</p>
+      <textarea id="s4-story" placeholder="例如：我曾在..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>自我认知标签（可多选）</label>
+      <div class="tag-group" id="s4-traits-select">
+        <span class="tag" data-val="resilient">坚韧不拔</span>
+        <span class="tag" data-val="creative">创造力强</span>
+        <span class="tag" data-val="empathetic">共情力强</span>
+        <span class="tag" data-val="analytical">善于分析</span>
+        <span class="tag" data-val="curious">好奇心旺盛</span>
+        <span class="tag" data-val="leader">天生领袖</span>
+        <span class="tag" data-val="collaborative">合作者</span>
+        <span class="tag" data-val="independent">独立思考</span>
+        <span class="tag" data-val="optimistic">乐观积极</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>家庭背景</label>
+      <select id="s4-background"><option value="">请选择</option><option value="firstgen">第一代大学生</option><option value="immigrant">移民家庭</option><option value="single">单亲家庭</option><option value="lowincome">低收入家庭</option><option value="ordinary">普通中产家庭</option><option value="privileged">资源优势家庭</option><option value="skip">跳过/不透露</option></select>
+    </div>
+    <div class="form-group">
+      <label>语言能力</label>
+      <select id="s4-language"><option value="">请选择</option><option value="bilingual">双语母语水平</option><option value="fluent">流利英语</option><option value="good">良好英语</option><option value="basic">基础英语</option><option value="skip">跳过/未确定</option></select>
+    </div>
+    <div class="form-group">
+      <label>面试信心</label>
+      <select id="s4-interview"><option value="">请选择</option><option value="confident">非常自信</option><option value="ok">还算从容</option><option value="nervous">有些紧张</option><option value="skip">跳过/未确定</option></select>
+    </div>
+  </div>
+  <div class="step-bottom"><button class="btn btn-primary" onclick="submitStep(4,5)">下一步</button></div>
+</div>
+
+<div id="page-step5" class="page">
+  <div class="topbar"><span class="back" onclick="prevStep(4)">←</span><span class="logo">留学罗盘</span></div>
+  <div class="step-container">
+    <div class="step-header"><h2>学校偏好</h2><p class="step-desc">告诉我们你的偏好，生成个性化推荐</p></div>
+    <div class="step-progress"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="current"></span></div>
+    <div class="form-group">
+      <label>地理位置偏好（可多选）</label>
+      <div class="tag-group" id="s5-regions-select">
+        <span class="tag" data-val="northeast">东北部</span>
+        <span class="tag" data-val="west">西部</span>
+        <span class="tag" data-val="midwest">中西部</span>
+        <span class="tag" data-val="south">南部</span>
+        <span class="tag" data-val="any">无偏好</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>学校规模</label>
+      <select id="s5-size"><option value="">请选择</option><option value="small">小型（&lt;5000人）</option><option value="medium">中型（5000-15000人）</option><option value="large">大型（&gt;15000人）</option><option value="any">无偏好</option></select>
+    </div>
+    <div class="form-group">
+      <label>学校类型</label>
+      <select id="s5-type"><option value="">请选择</option><option value="私立">私立</option><option value="公立">公立</option><option value="any">无偏好</option></select>
+    </div>
+    <div class="form-group">
+      <label>学费预算</label>
+      <select id="s5-tuition"><option value="">请选择</option><option value="high">无限制</option><option value="mid">中等（&lt;5万美元/年）</option><option value="low">经济型（&lt;3万美元/年）</option><option value="any">无偏好</option></select>
+    </div>
+  </div>
+  <div class="step-bottom"><button class="btn btn-gold" onclick="generateReport()">生成留学罗盘报告</button></div>
+</div>
+
+<!-- ========== REPORT PAGE ========== -->
+<div id="page-report" class="page">
+  <div class="topbar"><span class="back" onclick="goHome()">←</span><span class="logo">留学罗盘</span></div>
+  <div class="report-header">
+    <div class="total-score" id="r-total">--</div>
+    <div class="total-label">总分 / 110</div>
+  </div>
+  <div class="report-nav" id="report-nav">
+    <span class="nav-active" onclick="scrollReport('score')">评分</span>
+    <span onclick="scrollReport('schools')">院校推荐</span>
+    <span onclick="scrollReport('analysis')">优劣势</span>
+    <span onclick="scrollReport('advice')">行动建议</span>
+  </div>
+  <div class="report-section" id="section-score">
+    <h3>四维评分</h3>
+    <div class="canvas-wrap"><canvas id="radarCanvas" width="320" height="320"></canvas></div>
+    <div id="radar-items"></div>
+  </div>
+  <div class="report-section" id="report-portrait"></div>
+  <div class="report-section">
+    <div class="expand-panel">
+      <div class="expand-header" onclick="toggleScoring()">评分说明 ▾</div>
+      <div class="expand-body" id="scoring-body">
+        <table class="scoring-table">
+          <tr><th>维度</th><th>满分</th><th>权重</th></tr>
+          <tr><td>认知天花板</td><td>40</td><td>36%</td></tr>
+          <tr><td>专业好奇心</td><td>30</td><td>27%</td></tr>
+          <tr><td>社群贡献力</td><td>25</td><td>23%</td></tr>
+          <tr><td>个人特质</td><td>15</td><td>14%</td></tr>
+        </table>
+        <p style="font-size:12px;color:var(--text-light);margin-top:8px;">打分算法基于 U.S. News / NACAC / College Board 的招生权重数据，空值/跳过项给予30%基础分。</p>
+      </div>
+    </div>
+  </div>
+  <div class="report-section" id="section-schools"><h3>院校推荐</h3><div id="school-list"></div></div>
+  <div class="report-section" id="section-analysis"><h3>优劣势分析</h3><div id="analysis-list"></div></div>
+  <div class="report-section" id="section-advice"><h3>行动建议</h3><div id="advice-list"></div></div>
+  <div class="report-section">
+    <div class="section-contact">
+      <h4>需要人工复核？</h4>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:12px;">选校还需结合专业方向、预算、课程体系和申请时间线进一步判断</p>
+      <button class="btn btn-gold" onclick="contactAdvisor()">预约人工复核</button>
+    </div>
+  </div>
+  <div class="footer-brand">睿顺国际 · 留学罗盘</div>
+</div>
+
+<script>
+// ==================== DATA STORE ====================
+const store = {};
+let currentPage = 'home';
+
+// ==================== PAGE NAVIGATION ====================
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  currentPage = name;
+  window.scrollTo(0, 0);
+}
+function goHome() { showPage('home'); }
+function goStep(n) { showPage('step' + n); }
+function prevStep(n) { showPage('step' + n); }
+function startAssessment() { goStep(1); }
+
+// ==================== TAG TOGGLES ====================
+document.querySelectorAll('.tag-group').forEach(group => {
+  group.addEventListener('click', function(e) {
+    if (!e.target.classList.contains('tag')) return;
+    const tag = e.target;
+    const val = tag.dataset.val;
+    const isToggle = group.id.includes('select') && !group.dataset.single;
+    if (isToggle) tag.classList.toggle('selected');
+    else {
+      group.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+      tag.classList.add('selected');
+    }
+  });
+});
+
+function getSelectedTags(containerId) {
+  const tags = document.querySelectorAll('#' + containerId + ' .tag.selected');
+  return Array.from(tags).map(t => t.dataset.val);
+}
+
+// ==================== STEP SUBMISSION ====================
+function submitStep(stepNum, nextStep) {
+  if (stepNum === 1) {
+    store.gpa = document.getElementById('s1-gpa').value || 'skip';
+    store.curriculum = document.getElementById('s1-curriculum').value || 'skip';
+    store.test = document.getElementById('s1-test').value || 'skip';
+    store.competition = document.getElementById('s1-competition').value || 'skip';
+    store.difficulty = document.getElementById('s1-difficulty').value || 'skip';
+    if (!store.gpa) { alert('请选择GPA区间或跳过'); return; }
+  } else if (stepNum === 2) {
+    store.majors = getSelectedTags('s2-majors-select');
+    store.research = document.getElementById('s2-research').value || 'skip';
+    store.exploration = document.getElementById('s2-exploration').value || 'skip';
+    store.recommendation = document.getElementById('s2-recommendation').value || 'skip';
+    store.statement = document.getElementById('s2-statement').value || '';
+    if (store.majors.length === 0) { alert('请至少选择或跳过专业方向'); return; }
+  } else if (stepNum === 3) {
+    store.activities = getSelectedTags('s3-activities-select');
+    store.duration = document.getElementById('s3-duration').value || 'skip';
+    store.impactDesc = document.getElementById('s3-impact-desc').value || 'skip';
+    store.leadership = document.getElementById('s3-leadership').value || 'skip';
+    store.counselor = document.getElementById('s3-counselor').value || 'skip';
+    if (store.activities.length === 0) { alert('请至少选择或跳过活动类型'); return; }
+  } else if (stepNum === 4) {
+    store.story = document.getElementById('s4-story').value || '';
+    store.traits = getSelectedTags('s4-traits-select');
+    store.background = document.getElementById('s4-background').value || 'skip';
+    store.language = document.getElementById('s4-language').value || 'skip';
+    store.interview = document.getElementById('s4-interview').value || 'skip';
+    if (store.traits.length === 0) { alert('请至少选择或跳过自我认知标签'); return; }
+  }
+  showPage('step' + nextStep);
+}
+
+// ==================== SCORING ENGINE ====================
+function calcScore() {
+  const s = {};
+  s.cognitive = calcCognitive();
+  s.curiosity = calcCuriosity();
+  s.impact = calcImpact();
+  s.character = calcCharacter();
+  s.totalScore = s.cognitive + s.curiosity + s.impact + s.character;
+  return s;
+}
+
+function baseScore(val, scoreMap) {
+  if (!val || val === 'skip') return 0.3;
+  return scoreMap[val] || 0.3;
+}
+
+function calcCognitive() {
+  let total = 0;
+  const gpaMap = { '4.0': 1.0, '3.9': 0.85, '3.7': 0.65, '3.3': 0.45, '2.8': 0.3, '2.3': 0.2 };
+  const curMap = { 'ib': 1.0, 'ap5': 0.9, 'ap34': 0.7, 'ap12': 0.5, 'alevel': 0.85, 'honors': 0.55, 'regular': 0.3 };
+  const testMap = { 'sat1550': 1.0, 'sat1500': 0.85, 'sat1450': 0.7, 'sat1400': 0.55, 'sat1350': 0.4, 'sat1300': 0.3, 'skip': 0.3 };
+  const compMap = { 'intl_gold': 1.0, 'natl_gold': 0.9, 'state': 0.7, 'school': 0.45, 'participation': 0.3, 'none': 0.1 };
+  const diffMap = { 'most': 1.0, 'high': 0.8, 'average': 0.5, 'low': 0.3 };
+  total += baseScore(store.gpa, gpaMap) * 14;
+  total += baseScore(store.curriculum, curMap) * 8;
+  total += baseScore(store.test, testMap) * 10;
+  total += baseScore(store.competition, compMap) * 5;
+  total += baseScore(store.difficulty, diffMap) * 3;
+  return Math.round(total);
+}
+
+function calcCuriosity() {
+  let total = 0;
+  const researchMap = { 'pub': 1.0, 'prestige': 0.9, 'local': 0.65, 'self': 0.5, 'none': 0.2 };
+  const exploreMap = { 'deep': 1.0, 'moderate': 0.65, 'shallow': 0.35, 'none': 0.15 };
+  const recMap = { 'strong': 1.0, 'good': 0.7, 'average': 0.4 };
+  total += Math.min((store.majors || []).length, 4) / 4 * 10;
+  total += baseScore(store.research, researchMap) * 10;
+  total += baseScore(store.exploration, exploreMap) * 5;
+  total += baseScore(store.recommendation, recMap) * 3;
+  total += (store.statement && store.statement.length > 20 ? 2 : 0);
+  return Math.round(total);
+}
+
+function calcImpact() {
+  let total = 0;
+  const durMap = { '3plus': 1.0, '2years': 0.75, '1year': 0.5, 'less1': 0.3 };
+  const impactMap = { 'national': 1.0, 'regional': 0.8, 'school': 0.55, 'personal': 0.3 };
+  const leadMap = { 'founder': 1.0, 'president': 0.85, 'officer': 0.55, 'member': 0.3 };
+  const crMap = { 'strong': 1.0, 'good': 0.7, 'average': 0.4 };
+  total += Math.min((store.activities || []).length, 5) / 5 * 8;
+  total += baseScore(store.duration, durMap) * 5;
+  total += baseScore(store.impactDesc, impactMap) * 5;
+  total += baseScore(store.leadership, leadMap) * 5;
+  total += baseScore(store.counselor, crMap) * 2;
+  return Math.round(total);
+}
+
+function calcCharacter() {
+  let total = 0;
+  const bgMap = { 'firstgen': 1.0, 'immigrant': 0.85, 'single': 0.7, 'lowincome': 0.7, 'ordinary': 0.45, 'privileged': 0.3 };
+  const langMap = { 'bilingual': 1.0, 'fluent': 0.85, 'good': 0.6, 'basic': 0.35 };
+  const intvMap = { 'confident': 1.0, 'ok': 0.65, 'nervous': 0.35 };
+  total += baseScore(store.background, bgMap) * 4;
+  total += baseScore(store.language, langMap) * 4;
+  total += baseScore(store.interview, intvMap) * 2;
+  total += Math.min((store.traits || []).length, 5) / 5 * 3;
+  total += (store.story && store.story.length > 10 ? 2 : 0);
+  return Math.round(total);
+}
+
+// ==================== PORTRAIT MATCHING ====================
+const PORTRAITS = [
+  { code:'APX', name:'全才型', tagline:'六边形战士，各方面无明显短板', cognitive:[0.8,1],curiosity:[0.75,1],impact:[0.75,1],character:[0.7,1],icon:'apex' },
+  { code:'LGD', name:'传奇型', tagline:'在某个维度遥遥领先的非凡存在', cognitive:[0,1],curiosity:[0,1],impact:[0,1],character:[0,1],icon:'legd' },
+  { code:'HXA', name:'复合优势型', tagline:'学术+活动双线并进的典型', cognitive:[0.7,0.9],curiosity:[0.6,0.85],impact:[0.6,0.85],character:[0.45,0.75],icon:'hexa' },
+  { code:'ACD', name:'学术研究型', tagline:'以学术硬实力为核心驱动', cognitive:[0.7,1],curiosity:[0.65,1],impact:[0.3,0.6],character:[0.3,0.6],icon:'labs' },
+  { code:'HUS', name:'实干型', tagline:'用行动和影响力说话的领导者', cognitive:[0.4,0.7],curiosity:[0.3,0.65],impact:[0.7,1],character:[0.45,0.8],icon:'hust' },
+  { code:'SCL', name:'学术型（强势方向）', tagline:'单一领域的深度专家', cognitive:[0.6,0.9],curiosity:[0.5,0.8],impact:[0.2,0.5],character:[0.25,0.55],icon:'scor' },
+  { code:'CLB', name:'俱乐部领袖型', tagline:'校园活动的灵魂人物', cognitive:[0.35,0.65],curiosity:[0.25,0.55],impact:[0.7,0.95],character:[0.4,0.7],icon:'club' },
+  { code:'FRE', name:'火种型', tagline:'社区影响力与领导力的代表', cognitive:[0.3,0.6],curiosity:[0.3,0.6],impact:[0.75,1],character:[0.5,0.85],icon:'fire' },
+  { code:'ATS', name:'文艺型', tagline:'以艺术/人文为主要身份', cognitive:[0.35,0.7],curiosity:[0.45,0.85],impact:[0.25,0.6],character:[0.5,0.9],icon:'arts' },
+  { code:'MSE', name:'沉思型', tagline:'深邃内省的思想者', cognitive:[0.3,0.7],curiosity:[0.5,0.85],impact:[0.15,0.45],character:[0.7,1],icon:'muse' },
+  { code:'STR', name:'恒星型', tagline:'全面突出，天选之子', cognitive:[0.8,1],curiosity:[0.8,1],impact:[0.8,1],character:[0.7,1],icon:'star' },
+  { code:'TTN', name:'泰坦型', tagline:'学术能力登峰造极', cognitive:[0.85,1],curiosity:[0.65,0.9],impact:[0.4,0.7],character:[0.35,0.65],icon:'titn' },
+  { code:'PHS', name:'凤凰型', tagline:'在逆境中浴火重生的成长潜力股', cognitive:[0.3,0.6],curiosity:[0.3,0.6],impact:[0.3,0.65],character:[0.8,1],icon:'phnx' },
+  { code:'LNG', name:'潜伏型', tagline:'安静但充满潜力，等待爆发', cognitive:[0.35,0.7],curiosity:[0.35,0.7],impact:[0.2,0.5],character:[0.5,0.85],icon:'ling' },
+  { code:'RIS', name:'上升型', tagline:'轨迹持续向上，成长速度惊人', cognitive:[0.4,0.75],curiosity:[0.4,0.75],impact:[0.3,0.65],character:[0.5,0.85],icon:'rise' },
+  { code:'STD', name:'稳健型', tagline:'均衡发展，稳步向前', cognitive:[0.4,0.7],curiosity:[0.35,0.65],impact:[0.35,0.65],character:[0.4,0.7],icon:'sted' },
+  { code:'WAR', name:'温暖型', tagline:'以同理心和人际温暖见长', cognitive:[0.3,0.6],curiosity:[0.25,0.55],impact:[0.35,0.65],character:[0.65,0.9],icon:'warm' },
+  { code:'SAF', name:'安全型', tagline:'稳扎稳打，步步为营', cognitive:[0.35,0.6],curiosity:[0.3,0.55],impact:[0.3,0.55],character:[0.3,0.55],icon:'safe' },
+  { code:'SLW', name:'慢热型', tagline:'后劲十足，厚积薄发', cognitive:[0.25,0.5],curiosity:[0.25,0.5],impact:[0.2,0.45],character:[0.4,0.7],icon:'slow' },
+  { code:'NXA', name:'下一代全才', tagline:'潜力无限，多维度待开发', cognitive:[0.35,0.65],curiosity:[0.3,0.6],impact:[0.3,0.6],character:[0.3,0.65],icon:'nexa' },
+  { code:'MOD', name:'现代型', tagline:'综合实力中等，无明显短板', cognitive:[0.45,0.75],curiosity:[0.4,0.7],impact:[0.4,0.7],character:[0.35,0.65],icon:'mods' },
+  { code:'ORC', name:'神谕型', tagline:'专业直觉超群，天赋型选手', cognitive:[0.5,0.8],curiosity:[0.7,1],impact:[0.3,0.6],character:[0.4,0.7],icon:'orcl' },
+  { code:'POL', name:'北极星型', tagline:'坚定方向的指引者', cognitive:[0.35,0.65],curiosity:[0.35,0.7],impact:[0.35,0.7],character:[0.5,0.85],icon:'pols' },
+  { code:'PAT', name:'探路者型', tagline:'在未知领域开拓的先行者', cognitive:[0.3,0.6],curiosity:[0.6,0.85],impact:[0.3,0.65],character:[0.35,0.7],icon:'path' },
+  { code:'JMP', name:'跳跃型', tagline:'跨越式成长的破局者', cognitive:[0.25,0.55],curiosity:[0.3,0.65],impact:[0.4,0.75],character:[0.45,0.8],icon:'jump' },
+  { code:'NOT', name:'音符型', tagline:'以独特节奏书写申请故事', cognitive:[0.3,0.6],curiosity:[0.4,0.75],impact:[0.3,0.65],character:[0.5,0.85],icon:'note' },
+  { code:'ZRO', name:'零点型', tagline:'从零开始的无限可能', cognitive:[0.15,0.45],curiosity:[0.15,0.45],impact:[0.15,0.45],character:[0.25,0.55],icon:'zero' }
+];
+
+function matchPortrait(scores) {
+  const dims = ['cognitive','curiosity','impact','character'];
+  const maxes = { cognitive:40, curiosity:30, impact:25, character:15 };
+  let bestMatch = null, bestDist = Infinity;
+  PORTRAITS.forEach(p => {
+    let dist = 0;
+    dims.forEach(k => {
+      const ratio = scores[k] / maxes[k];
+      const mid = (p[k][0] + p[k][1]) / 2;
+      dist += Math.pow(ratio - mid, 2);
+    });
+    dist = Math.sqrt(dist);
+    if (dist < bestDist) { bestDist = dist; bestMatch = p; }
+  });
+  return bestMatch;
+}
+
+// ==================== SCHOOL RECOMMENDATION ====================
+function getRecommendedSchools(scores) {
+  const regions = getSelectedTags('s5-regions-select');
+  const size = document.getElementById('s5-size') ? document.getElementById('s5-size').value : 'any';
+  const type = document.getElementById('s5-type') ? document.getElementById('s5-type').value : 'any';
+  const tuition = document.getElementById('s5-tuition') ? document.getElementById('s5-tuition').value : 'any';
+
+  let schools = SCHOOLS.filter(s => {
+    if (size !== 'any') {
+      const sSize = s.size;
+      if (size === 'small' && sSize >= 5000) return false;
+      if (size === 'medium' && (sSize < 5000 || sSize > 15000)) return false;
+      if (size === 'large' && sSize <= 15000) return false;
+    }
+    if (type !== 'any' && s.type !== type) return false;
+    if (tuition === 'mid' && s.tuition >= 50000) return false;
+    if (tuition === 'low' && s.tuition >= 30000) return false;
+    if (regions && regions.length > 0 && !regions.includes('any')) {
+      const loc = s.location;
+      if (!regions.some(r => loc.includes(r))) return false;
+    }
+    return true;
+  });
+
+  const tierMap = { T0: 0, T1: 1, T2: 2, T3: 3, T4: 4, T5: 5 };
+  const total = scores.totalScore;
+  let reachTier, matchTier, safeTier;
+  if (total >= 90) { reachTier = 0; matchTier = 1; safeTier = 2; }
+  else if (total >= 75) { reachTier = 1; matchTier = 2; safeTier = 3; }
+  else if (total >= 60) { reachTier = 2; matchTier = 3; safeTier = 4; }
+  else if (total >= 45) { reachTier = 3; matchTier = 4; safeTier = 5; }
+  else { reachTier = 4; matchTier = 5; safeTier = 5; }
+
+  function pick(tierIdx, count) {
+    return schools.filter(s => tierMap[s.tier] === tierIdx)
+      .sort((a,b) => a.rank - b.rank).slice(0, count);
+  }
+
+  return {
+    reach: pick(reachTier, 5),
+    match: pick(matchTier, 5),
+    safe: pick(safeTier, 5)
+  };
+}
+
+// ==================== REPORT GENERATION ====================
+function generateReport() {
+  store.regions = getSelectedTags('s5-regions-select');
+  store.sizePref = document.getElementById('s5-size') ? document.getElementById('s5-size').value : 'any';
+  store.typePref = document.getElementById('s5-type') ? document.getElementById('s5-type').value : 'any';
+  store.tuitionPref = document.getElementById('s5-tuition') ? document.getElementById('s5-tuition').value : 'any';
+
+  const scores = calcScore();
+  const portrait = matchPortrait(scores);
+  const schools = getRecommendedSchools(scores);
+
+  showPage('report');
+  setTimeout(() => {
+    renderReport(scores, portrait, schools);
+    drawRadarChart(scores);
+  }, 200);
+}
+
+function renderReport(scores, portrait, schools) {
+  document.getElementById('r-total').textContent = scores.totalScore;
+
+  // Portrait
+  const pc = document.getElementById('report-portrait');
+  pc.innerHTML = `<div class="portrait-card">
+    <div class="p-code">${portrait.code}</div>
+    <div class="p-name">${portrait.name}</div>
+    <div class="p-tagline">${portrait.tagline}</div>
+  </div>`;
+
+  // Radar items
+  const dims = [
+    { key:'cognitive', name:'认知天花板', score:scores.cognitive, max:40, color:'#1B2A4A' },
+    { key:'curiosity', name:'专业好奇心', score:scores.curiosity, max:30, color:'#3A5078' },
+    { key:'impact', name:'社群贡献力', score:scores.impact, max:25, color:'#C9A96E' },
+    { key:'character', name:'个人特质', score:scores.character, max:15, color:'#3A7D5A' }
+  ];
+  const ri = document.getElementById('radar-items');
+  ri.innerHTML = dims.map(d => {
+    const ratio = d.score / d.max;
+    let level, lc;
+    if (ratio >= 0.75) { level = '突出'; lc = 'ri-high'; }
+    else if (ratio >= 0.5) { level = '中等'; lc = 'ri-mid'; }
+    else if (ratio >= 0.3) { level = '偏低'; lc = 'ri-low'; }
+    else { level = '薄弱'; lc = 'ri-weak'; }
+    return `<div class="radar-item">
+      <span class="ri-name">${d.name}</span>
+      <span class="ri-level ${lc}">${level}</span>
+      <span class="ri-score">${d.score}/${d.max}</span>
+    </div>`;
+  }).join('');
+
+  // Schools
+  const sl = document.getElementById('school-list');
+  function renderSchoolGroup(title, list) {
+    if (list.length === 0) return '';
+    return `<h4 style="font-size:14px;color:var(--navy);margin:16px 0 8px;">${title}</h4>` +
+      list.map(s => `<div class="school-card">
+        <span class="sc-tier">T${s.tier}</span>
+        <div class="sc-name">${s.name}</div>
+        <div class="sc-name-cn">${s.nameCN}</div>
+        <div class="sc-meta">U.S. News #${s.rank} · ${s.location} · ${s.type} · ${s.size.toLocaleString()}人 · $${(s.tuition/1000).toFixed(0)}K/年</div>
+        <div class="sc-keywords">${s.strengths.map(st => `<span class="sc-keyword">${st}</span>`).join('')}</div>
+      </div>`).join('');
+  }
+  sl.innerHTML = renderSchoolGroup('冲刺', schools.reach)
+    + renderSchoolGroup('匹配', schools.match)
+    + renderSchoolGroup('保底', schools.safe);
+
+  // Analysis
+  const sorted = dims.sort((a,b) => (b.score/b.max) - (a.score/a.max));
+  const strengths = sorted.slice(0,2);
+  const weaknesses = sorted.slice(2);
+  const al = document.getElementById('analysis-list');
+  al.innerHTML = `<p style="font-size:13px;color:var(--gold);font-weight:600;margin-bottom:6px;">优势</p>` +
+    strengths.map(d => `<div class="advice-item" style="border-left-color:var(--green);">${d.name}：${getStrengthText(d.name)}</div>`).join('') +
+    `<p style="font-size:13px;color:var(--text-light);font-weight:600;margin:12px 0 6px;">可提升</p>` +
+    weaknesses.map(d => `<div class="advice-item">${d.name}：${getWeaknessText(d.name)}</div>`).join('');
+
+  // Advice
+  const adv = document.getElementById('advice-list');
+  const ratios = {};
+  dims.forEach(d => { ratios[d.key] = d.score / d.max; });
+  const items = [];
+  if (ratios.cognitive < 0.5) items.push('学术是申请基石：考虑选修1-2门AP/IB高阶课程，或通过SAT/ACT高分来补充学术竞争力。');
+  if (ratios.curiosity < 0.5) items.push('深度探索专业方向：建议参加1次线上科研或暑期项目，产出至少一个小作品（论文/项目/博客）。');
+  if (ratios.impact < 0.5) items.push('打造社群影响力：锁定1个你最关心的社会议题，持续投入18个月以上，争取从参与者变成组织者。');
+  if (ratios.character < 0.5) items.push('打磨个人故事：现在就开始写"人生故事清单"，梳理10个对你影响最大的经历。');
+  if (scores.totalScore >= 75) {
+    items.push('冲刺Top 30需要"独特性"：在文书中展现一个只有你能讲的故事。');
+    items.push('提前联系目标学校的招生官或校友面试，展现你的真诚兴趣和主动精神。');
+  }
+  if (scores.totalScore >= 50 && scores.totalScore < 75) {
+    items.push('合理安排申请梯度：2-3所冲刺 + 4-5所匹配 + 2-3所保底。');
+    items.push('重点关注学校的"Why School"文书，展现你对该校的深度了解。');
+  }
+  if (scores.totalScore < 50) {
+    items.push('考虑Test-Optional院校和社区大学2+2转学路径，成功率不低。');
+    items.push('聚焦1-2个亮点深度打造，让招生官看到一个"有故事"的你。');
+  }
+  items.push('定期复盘申请进度，每完成一轮文书修改，请至少两位不同背景的人提供反馈。');
+  adv.innerHTML = items.map(t => `<div class="advice-item">${t}</div>`).join('');
+}
+
+function getStrengthText(name) {
+  const map = {
+    '认知天花板': '你的学术成绩和课程挑战度在申请池中具有明显竞争优势。',
+    '专业好奇心': '你对专业领域的探索深度和广度远超同龄人。',
+    '社群贡献力': '你在社群中展现的领导力和实际影响力令人印象深刻。',
+    '个人特质': '你的内省深度、同理心和面对逆境的韧性，会在文书和面试中自然流露。'
+  };
+  return map[name] || '该维度表现突出。';
+}
+
+function getWeaknessText(name) {
+  const map = {
+    '认知天花板': '学术成绩或课程挑战度还有提升空间。',
+    '专业好奇心': '专业方向的探索深度可以进一步加强。',
+    '社群贡献力': '社群影响力是可提升的维度，持续参与并争取领导角色。',
+    '个人特质': '个人特质可通过深度反思和文书打磨来展现。'
+  };
+  return map[name] || '这部分有提升空间。';
+}
+
+// ==================== RADAR CHART ====================
+function drawRadarChart(scores) {
+  const canvas = document.getElementById('radarCanvas');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const dims = ['cognitive','curiosity','impact','character'];
+  const maxes = { cognitive:40, curiosity:30, impact:25, character:15 };
+  const labels = ['认知天花板','专业好奇心','社群贡献力','个人特质'];
+  const colors = ['#1B2A4A','#3A5078','#C9A96E','#3A7D5A'];
+  const n = 4, cx = w/2, cy = h/2 - 10, r = Math.min(w,h)*0.28;
+  const startAngle = -Math.PI/2, angleStep = 2*Math.PI/n;
+
+  ctx.strokeStyle = '#E8E5DF';
+  for (let level = 1; level <= 5; level++) {
+    ctx.beginPath();
+    const prop = level/5;
+    for (let i = 0; i <= n; i++) {
+      const ang = startAngle + i * angleStep;
+      const x = cx + r * prop * Math.cos(ang);
+      const y = cy + r * prop * Math.sin(ang);
+      i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  for (let i = 0; i < n; i++) {
+    const ang = startAngle + i * angleStep;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + r * Math.cos(ang), cy + r * Math.sin(ang));
+    ctx.stroke();
+  }
+
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const prop = scores[dims[i]] / maxes[dims[i]];
+    const ang = startAngle + i * angleStep;
+    const x = cx + r * prop * Math.cos(ang);
+    const y = cy + r * prop * Math.sin(ang);
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(27,42,74,0.12)';
+  ctx.fill();
+  ctx.strokeStyle = '#1B2A4A';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  for (let i = 0; i < n; i++) {
+    const prop = scores[dims[i]] / maxes[dims[i]];
+    const ang = startAngle + i * angleStep;
+    const x = cx + r * prop * Math.cos(ang);
+    const y = cy + r * prop * Math.sin(ang);
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, 2*Math.PI);
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+    ctx.fillStyle = colors[i];
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(scores[dims[i]]+'/'+maxes[dims[i]], x+10*Math.cos(ang), y+10*Math.sin(ang)+4);
+  }
+
+  for (let i = 0; i < n; i++) {
+    const ang = startAngle + i * angleStep;
+    const lx = cx + (r+28) * Math.cos(ang);
+    const ly = cy + (r+28) * Math.sin(ang) + 4;
+    ctx.fillStyle = '#1B2A4A';
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(labels[i], lx, ly);
+  }
+}
+
+// ==================== REPORT NAV ====================
+function scrollReport(section) {
+  document.querySelectorAll('#report-nav span').forEach(s => s.classList.remove('nav-active'));
+  event.target.classList.add('nav-active');
+  document.getElementById('section-' + section).scrollIntoView({ behavior:'smooth' });
+}
+
+// ==================== SCORING PANEL ====================
+function toggleScoring() {
+  document.getElementById('scoring-body').classList.toggle('open');
+}
+
+// ==================== CONTACT ====================
+function contactAdvisor() {
+  alert('顾问将尽快联系你。');
+}
+
+// ==================== SCHOOL DATA ====================
+</script>
+<script src="schools_data.js"></script>
+</body>
+</html>
