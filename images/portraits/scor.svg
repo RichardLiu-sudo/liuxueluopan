@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <rect x="55" y="120" width="90" height="12" rx="3" fill="#1B2A4A"/>
+    <rect x="65" y="115" width="70" height="10" rx="2" fill="#3A5078"/>
+    <path d="M 85 40 L 85 95 Q 85 120 100 120 Q 115 120 115 95 L 115 40 Z" fill="#C9A96E" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 85 55 Q 65 55 65 70 Q 65 85 85 85" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 115 55 Q 135 55 135 70 Q 135 85 115 85" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 100 25 L 105 35 L 115 35 L 108 42 L 111 52 L 100 45 L 89 52 L 92 42 L 85 35 L 95 35 Z" fill="#3A5078" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#3A5078"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">SCOR</text>
+  </g>
+</svg>

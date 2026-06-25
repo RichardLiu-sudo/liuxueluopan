@@ -1,0 +1,213 @@
+<view class="container">
+  <!-- 总分卡片 -->
+  <view class="score-card" id="section-score">
+    <text class="score-label">你的综合评分</text>
+    <text class="score-value">{{scores.totalScore}}</text>
+    <text class="score-unit">/ 110 分制 · {{scores.level}} 级</text>
+    <view class="percentile-badge">
+      <text class="percentile-text">{{scores.level === 'S' ? 'S级：四维均衡突出，Top 20竞争力' : scores.level === 'A' ? 'A级：有明显优势维度，Top 50竞争力' : scores.level === 'B' ? 'B级：均衡发展，Top 100竞争力' : 'C级：有明确提升空间'}}</text>
+    </view>
+    <text class="score-algo-hint">评分基于认知天花板(40)、专业好奇心(30)、社群贡献力(25)、个人特质(15)四维度综合加权，仅供初步选校参考</text>
+    <view class="scoring-expand" bindtap="toggleScoring">
+      <text class="scoring-expand-text">{{scoringExpanded ? '收起评分说明 ▲' : '查看评分说明 ▼'}}</text>
+    </view>
+    <view class="scoring-explain-panel" wx:if="{{scoringExpanded}}">
+      <view class="explain-row">
+        <text class="explain-dim">认知天花板与学术潜能</text>
+        <text class="explain-weight">40分</text>
+        <text class="explain-desc">GPA+课程+标化+竞赛</text>
+      </view>
+      <view class="explain-row">
+        <text class="explain-dim">专业专注度与学术好奇心</text>
+        <text class="explain-weight">30分</text>
+        <text class="explain-desc">科研+探索+推荐信</text>
+      </view>
+      <view class="explain-row">
+        <text class="explain-dim">社群贡献力与影响力</text>
+        <text class="explain-weight">25分</text>
+        <text class="explain-desc">活动+领导力+影响力</text>
+      </view>
+      <view class="explain-row">
+        <text class="explain-dim">个人特质与抗挫折力</text>
+        <text class="explain-weight">15分</text>
+        <text class="explain-desc">成长故事+语言+面试</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 目录导航 -->
+  <scroll-view class="nav-bar" scroll-x="true" enable-flex>
+    <view class="nav-item {{navActive==='radar'?'nav-active':''}}" data-section="radar" bindtap="scrollToSection">评分</view>
+    <view class="nav-item {{navActive==='schools'?'nav-active':''}}" data-section="schools" bindtap="scrollToSection">院校</view>
+    <view class="nav-item {{navActive==='summary'?'nav-active':''}}" data-section="summary" bindtap="scrollToSection">优势</view>
+    <view class="nav-item {{navActive==='suggestions'?'nav-active':''}}" data-section="suggestions" bindtap="scrollToSection">建议</view>
+    <view class="nav-item {{navActive==='advisor'?'nav-active':''}}" data-section="advisor" bindtap="scrollToSection">复核</view>
+  </scroll-view>
+
+  <!-- 画像展示区 -->
+  <view class="portrait-section" wx:if="{{portraitData}}">
+    <view class="portrait-header">
+      <text class="portrait-badge">{{portraitData.group}}</text>
+      <text class="portrait-confidence">匹配度：{{confidence}}</text>
+    </view>
+    <view class="portrait-body">
+      <text class="portrait-code">{{portraitData.code}}</text>
+      <text class="portrait-name">{{portraitData.name}}</text>
+      <view class="portrait-tagline-wrap">
+        <text class="portrait-quote-mark">"</text>
+        <text class="portrait-tagline">{{portraitData.tagline}}</text>
+      </view>
+      <text class="portrait-desc">{{portraitData.desc}}</text>
+    </view>
+  </view>
+
+  <!-- 四维菱形雷达图 -->
+  <view class="radar-section" id="section-radar">
+    <text class="section-title">四维竞争力雷达图</text>
+    <canvas type="2d" id="radarCanvas" class="radar-canvas"></canvas>
+    <!-- 雷达解读 -->
+    <view class="radar-interp">
+      <view class="interp-row" wx:for="{{radarInterp}}" wx:key="name">
+        <view class="interp-header">
+          <view class="interp-dot interp-dot-{{item.levelClass}}"></view>
+          <text class="interp-name">{{item.name}}</text>
+          <text class="interp-level interp-level-{{item.levelClass}}">{{item.level}}</text>
+        </view>
+        <text class="interp-desc">{{item.score}}/{{item.max}}分 — {{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 院校推荐 -->
+  <view class="school-section" id="section-schools">
+    <text class="section-title">院校推荐</text>
+
+    <!-- 冲刺 -->
+    <view wx:if="{{schools.reach.length}}">
+      <text class="section-title" style="font-size:26rpx;color:#C9A96E;border-left-color:#C9A96E;">冲刺院校</text>
+      <view class="school-card reach" wx:for="{{schools.reach}}" wx:key="name">
+        <view class="school-header">
+          <text class="school-name">{{item.nameCN || item.name}}</text>
+          <text class="school-rank">T{{item.tier === 'T0' ? 'op 10' : item.tier === 'T1' ? 'op 20' : item.tier === 'T2' ? 'op 30-50' : item.tier === 'T3' ? 'op 50-100' : item.tier === 'T4' ? 'op 100-200' : 'op 200+'}}</text>
+        </view>
+        <text class="school-en" wx:if="{{item.nameCN}}">{{item.name}}</text>
+        <view class="school-tags">
+          <text class="tag-difficulty tag-difficulty-reach">{{item.reason.difficulty || '极高竞争'}}</text>
+          <text class="tag-keyword" wx:for="{{item.reason.keywords.split(',')}}" wx:key="*this" wx:for-item="kw">{{kw}}</text>
+        </view>
+        <text class="school-match-reason">{{item.reason.matchReason}}</text>
+        <text class="school-majors">{{item.reason.majors}}</text>
+      </view>
+    </view>
+
+    <!-- 匹配 -->
+    <view wx:if="{{schools.match.length}}">
+      <text class="section-title" style="font-size:26rpx;color:#3A5078;border-left-color:#3A5078;margin-top:16rpx;">匹配院校</text>
+      <view class="school-card match" wx:for="{{schools.match}}" wx:key="name">
+        <view class="school-header">
+          <text class="school-name">{{item.nameCN || item.name}}</text>
+          <text class="school-rank">T{{item.tier === 'T0' ? 'op 10' : item.tier === 'T1' ? 'op 20' : item.tier === 'T2' ? 'op 30-50' : item.tier === 'T3' ? 'op 50-100' : item.tier === 'T4' ? 'op 100-200' : 'op 200+'}}</text>
+        </view>
+        <text class="school-en" wx:if="{{item.nameCN}}">{{item.name}}</text>
+        <view class="school-tags">
+          <text class="tag-difficulty tag-difficulty-match">{{item.reason.difficulty || '匹配区间'}}</text>
+          <text class="tag-keyword" wx:for="{{item.reason.keywords.split(',')}}" wx:key="*this" wx:for-item="kw">{{kw}}</text>
+        </view>
+        <text class="school-match-reason">{{item.reason.matchReason}}</text>
+        <text class="school-majors">{{item.reason.majors}}</text>
+      </view>
+    </view>
+
+    <!-- 保底 -->
+    <view wx:if="{{schools.safety.length}}">
+      <text class="section-title" style="font-size:26rpx;color:#3A7D5A;border-left-color:#3A7D5A;margin-top:16rpx;">保底院校</text>
+      <view class="school-card safety" wx:for="{{schools.safety}}" wx:key="name">
+        <view class="school-header">
+          <text class="school-name">{{item.nameCN || item.name}}</text>
+          <text class="school-rank">T{{item.tier === 'T0' ? 'op 10' : item.tier === 'T1' ? 'op 20' : item.tier === 'T2' ? 'op 30-50' : item.tier === 'T3' ? 'op 50-100' : item.tier === 'T4' ? 'op 100-200' : 'op 200+'}}</text>
+        </view>
+        <text class="school-en" wx:if="{{item.nameCN}}">{{item.name}}</text>
+        <view class="school-tags">
+          <text class="tag-difficulty tag-difficulty-safety">{{item.reason.difficulty || '相对友好'}}</text>
+          <text class="tag-keyword" wx:for="{{item.reason.keywords.split(',')}}" wx:key="*this" wx:for-item="kw">{{kw}}</text>
+        </view>
+        <text class="school-match-reason">{{item.reason.matchReason}}</text>
+        <text class="school-majors">{{item.reason.majors}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 优劣势总结 -->
+  <view class="summary-section" id="section-summary">
+    <text class="section-title">优劣势分析</text>
+    <view class="summary-row" wx:for="{{summary.strengths}}" wx:key="name">
+      <text class="summary-label label-good">优势</text>
+      <text class="summary-text">【{{item.name}}】{{item.text}}</text>
+    </view>
+    <view class="summary-row" wx:for="{{summary.weaknesses}}" wx:key="name">
+      <text class="summary-label label-weak">可提升</text>
+      <text class="summary-text">【{{item.name}}】{{item.text}}</text>
+    </view>
+  </view>
+
+  <!-- 行动建议 -->
+  <view class="summary-section" id="section-suggestions">
+    <text class="section-title">行动建议</text>
+    <view class="suggestion-item" wx:for="{{suggestions}}" wx:key="*this">
+      <text class="suggestion-num">{{index + 1}}.</text>
+      <text class="suggestion-text">{{item.text}}</text>
+    </view>
+  </view>
+
+  <!-- 预约人工复核 -->
+  <view class="advisor-card" id="section-advisor">
+    <view class="advisor-card-inner">
+      <text class="advisor-title">你的报告已生成</text>
+      <text class="advisor-body">选校还需要结合专业方向、预算、课程体系和申请时间线进一步判断。让顾问帮你做一次免费人工复核，确保选校策略准确。</text>
+      <view class="advisor-btn" bindtap="contactAdvisor">
+        <text class="advisor-btn-text">预约人工复核</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 特殊背景选填入口 -->
+  <view class="bg-label-section" wx:if="{{!extraAdvantage}}">
+    <view class="bg-label-entry">
+      <text class="bg-label-hint">有特殊背景（第一代大学生 / 校友子女 / 运动员招募等）？</text>
+      <text class="bg-label-cta" bindtap="openBgPicker">点击补充，可能获得额外录取优势</text>
+    </view>
+  </view>
+  <view class="bg-label-section" wx:if="{{extraAdvantage}}">
+    <view class="bg-label-added">
+      <text class="bg-label-tag">额外优势：{{extraAdvantage}}</text>
+      <text class="bg-label-change" bindtap="openBgPicker">修改</text>
+    </view>
+  </view>
+
+  <!-- 特殊背景 Picker 弹窗 -->
+  <view class="bg-picker-mask" wx:if="{{showBgPicker}}" bindtap="closeBgPicker">
+    <view class="bg-picker-popup" catchtap="">
+      <text class="bg-picker-title">选择特殊背景</text>
+      <text class="bg-picker-desc">此标签不参与评分，仅在报告中作为附加标注</text>
+      <picker-view class="bg-picker-view" value="{{[0]}}" bindchange="onBgChange">
+        <picker-view-column>
+          <view class="bg-picker-item" wx:for="{{bgOptions}}" wx:key="*this">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+      <view class="bg-picker-btns">
+        <view class="bg-picker-btn bg-picker-cancel" bindtap="closeBgPicker">取消</view>
+        <view class="bg-picker-btn bg-picker-confirm" bindtap="saveBgLabel">确认</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 品牌底部 -->
+  <view class="brand-footer">
+    <text class="brand-footer-text">由睿顺国际提供专业留学咨询</text>
+    <view class="brand-footer-logo">
+      <view class="brand-logo-placeholder">
+        <text class="brand-logo-text">睿</text>
+      </view>
+    </view>
+  </view>
+</view>

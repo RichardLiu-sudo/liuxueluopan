@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <circle cx="100" cy="72" r="50" fill="none" stroke="#3A5078" stroke-width="2"/>
+    <path d="M 100 40 Q 70 35 65 65 Q 60 85 80 100 Q 100 95 100 80 Q 100 95 120 100 Q 140 85 135 65 Q 130 35 100 40 Z" fill="#C9A96E" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="100" cy="48" r="14" fill="#C9A96E"/>
+    <circle cx="106" cy="45" r="3" fill="#F7F6F3"/>
+    <path d="M 100 34 L 95 25 L 100 30 L 105 25 Z" fill="#3A5078" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 72 70 Q 85 60 90 80" fill="none" stroke="#F7F6F3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 128 70 Q 115 60 110 80" fill="none" stroke="#F7F6F3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#C9A96E"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">PHNX</text>
+  </g>
+</svg>

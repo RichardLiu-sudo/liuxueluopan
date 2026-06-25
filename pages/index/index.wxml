@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="hero">
+    <text class="title">留学罗盘</text>
+    <text class="subtitle">本科选校测评 · 四维诊断精准定位你的梦校</text>
+  </view>
+  <view class="steps-overview">
+    <view class="step-row" wx:for="{{['认知天花板','专业好奇心','社群贡献力','个人特质','学校偏好']}}" wx:key="*this">
+      <view class="step-num">{{index+1}}</view>
+      <view class="step-info">
+        <text class="step-name">{{item}}</text>
+        <text class="step-brief" wx:if="{{index===0}}">40分 — GPA/课程/标化/竞赛</text>
+        <text class="step-brief" wx:if="{{index===1}}">30分 — 科研/探索/推荐信</text>
+        <text class="step-brief" wx:if="{{index===2}}">25分 — 活动/领导力/影响力</text>
+        <text class="step-brief" wx:if="{{index===3}}">15分 — 成长故事/语言/面试</text>
+        <text class="step-brief" wx:if="{{index===4}}">偏好匹配院校</text>
+      </view>
+    </view>
+  </view>
+  <view class="value-strip">
+    <view class="value-item">
+      <text class="value-text">约3分钟，4步完成核心测评</text>
+    </view>
+    <view class="value-item">
+      <text class="value-text">冲刺/匹配/保底院校清单</text>
+    </view>
+    <view class="value-item">
+      <text class="value-text">四维竞争力分析 + 画像匹配</text>
+    </view>
+  </view>
+  <view class="tips">
+    <view class="tips-highlight">
+      <text class="tips-highlight-text">5步走完，自动生成选校报告 + 四维菱形雷达图</text>
+    </view>
+  </view>
+  <button class="btn-primary" bindtap="startAssessment">开始测评</button>
+  <view class="brand-footer">
+    <text class="brand-footer-text">由睿顺国际提供专业留学咨询</text>
+    <view class="brand-footer-logo">
+      <view class="brand-logo-placeholder">
+        <text class="brand-logo-text">睿</text>
+      </view>
+    </view>
+  </view>
+</view>

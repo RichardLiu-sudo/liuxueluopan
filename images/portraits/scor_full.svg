@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="600" height="800" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <!-- Card background -->
+    <rect x="0" y="0" width="600" height="800" rx="20" fill="#F7F6F3"/>
+    
+    <!-- Top stripe -->
+    <rect x="0" y="0" width="600" height="12" fill="#1B2A4A"/>
+    
+    <!-- Group badge top-right -->
+    <rect x="420" y="30" width="160" height="36" rx="18" fill="#C07B3D" opacity="0.15"/>
+    <text x="500" y="53" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#C07B3D" font-weight="600">剑走偏锋群</text>
+    
+    <!-- Character area -->
+    <g transform="translate(300, 280)">
+
+<circle cx="0" cy="-80" r="42" fill="#F7F6F3" stroke="#1B2A4A" stroke-width="3"/>
+<line x1="-30" y1="-123" x2="-30" y2="-146" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<line x1="-20" y1="-117" x2="-20" y2="-140" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<line x1="-10" y1="-111" x2="-10" y2="-134" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<line x1="0" y1="-105" x2="0" y2="-128" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<line x1="10" y1="-111" x2="10" y2="-134" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<line x1="20" y1="-117" x2="20" y2="-140" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<line x1="30" y1="-123" x2="30" y2="-146" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
+<rect x="-24" y="-97" width="20" height="14" rx="3" fill="none" stroke="#1B2A4A" stroke-width="2.5"/>
+<rect x="4" y="-97" width="20" height="14" rx="3" fill="none" stroke="#1B2A4A" stroke-width="2.5"/>
+<line x1="-4" y1="-90" x2="4" y2="-90" stroke="#1B2A4A" stroke-width="2"/>
+<circle cx="-14" cy="-90" r="2.5" fill="#1B2A4A"/>
+<circle cx="14" cy="-90" r="2.5" fill="#1B2A4A"/>
+<path d="M-8,-70 Q0,-62 8,-70" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round"/>
+<polygon points="-32,-35 32,-35 28,70 -28,70" fill="#C07B3D" stroke="#1B2A4A" stroke-width="2"/>
+<text x="0" y="30" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="700" fill="#F7F6F3">100</text>
+    </g>
+    
+    <!-- Code - large -->
+    <text x="300" y="440" text-anchor="middle" font-family="sans-serif" font-size="56" font-weight="800" fill="#1B2A4A" letter-spacing="8">SCOR</text>
+    
+    <!-- Name -->
+    <text x="300" y="488" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#1B2A4A">标化战神</text>
+    
+    <!-- Tagline -->
+    <rect x="80" y="510" width="440" height="44" rx="8" fill="#1B2A4A" opacity="0.05"/>
+    <text x="300" y="538" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3A5078" font-style="italic">"SAT 1600，但周末只想打游戏"</text>
+    
+    <!-- Divider line -->
+    <line x1="120" y1="570" x2="480" y2="570" stroke="#C07B3D" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Description lines -->
+
+    <text x="120" y="600" font-family="sans-serif" font-size="17" fill="#5A6A82">• SAT/ACT满分，标化所向披靡</text>
+    <text x="120" y="632" font-family="sans-serif" font-size="17" fill="#5A6A82">• 活动列表寥寥，但真实不做作</text>
+    <text x="120" y="664" font-family="sans-serif" font-size="17" fill="#5A6A82">• 核心优势：完美的标化成绩</text>
+    <text x="120" y="696" font-family="sans-serif" font-size="17" fill="#5A6A82">• 策略：深度挖掘真正兴趣</text>
+    <text x="120" y="728" font-family="sans-serif" font-size="17" fill="#5A6A82">• 建议：坦诚展示自己的兴趣世界</text>
+
+    <!-- Bottom accent bar -->
+    <rect x="0" y="788" width="600" height="12" fill="#C07B3D" opacity="0.7"/>
+    
+    <!-- Brand mark -->
+    <text x="300" y="750" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#3A5078" opacity="0.5">留学罗盘 · 睿顺国际</text>
+    
+  </g>
+</svg>

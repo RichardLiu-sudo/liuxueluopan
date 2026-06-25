@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <circle cx="100" cy="72" r="50" fill="none" stroke="#1B2A4A" stroke-width="2"/>
+    <circle cx="100" cy="72" r="35" fill="none" stroke="#C9A96E" stroke-width="1.5"/>
+    <circle cx="100" cy="72" r="20" fill="none" stroke="#3A5078" stroke-width="2"/>
+    <circle cx="100" cy="72" r="6" fill="#1B2A4A"/>
+    <path d="M 100 72 L 130 42" fill="#C9A96E" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 130 42 L 120 46 L 126 52 Z" fill="#C9A96E" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#1B2A4A"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">ZERO</text>
+  </g>
+</svg>

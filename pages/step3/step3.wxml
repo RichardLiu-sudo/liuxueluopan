@@ -1,0 +1,71 @@
+<view class="container">
+  <view class="step-progress-bar">
+    <text class="step-progress-label">第 3/5 步</text>
+    <view class="step-progress-grid">
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-active"></view>
+      <view class="step-progress-cell"></view>
+      <view class="step-progress-cell"></view>
+    </view>
+  </view>
+
+  <view class="step-header">
+    <text class="step-badge">Step 3</text>
+    <text class="step-title">社群贡献力与影响力</text>
+    <text class="step-desc">满分 25 分 — 你能给班级和宿舍带来什么？</text>
+  </view>
+
+  <view class="step-indicator">
+    <view class="step-dot done"></view>
+    <view class="step-dot done"></view>
+    <view class="step-dot active"></view>
+    <view class="step-dot"></view>
+    <view class="step-dot"></view>
+  </view>
+
+  <view class="form">
+    <view class="form-group">
+      <text class="label">非学术活动类型（多选，最多3个）</text>
+      <view class="tag-grid">
+        <view class="tag {{item.checked ? 'tag-active' : ''}}" wx:for="{{activityOptions}}" wx:key="value" data-index="{{index}}" bindtap="onActivityToggle">{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <text class="label">最长持续年限</text>
+      <picker mode="selector" range="{{durationOptions}}" value="{{durationIndex}}" bindchange="onDurationChange">
+        <view class="picker">
+          <text class="{{duration ? '' : 'picker-placeholder'}}">{{duration || '请选择持续年限'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">影响力描述（选填，最多150字）</text>
+      <textarea class="textarea-field" placeholder="你的参与让你的学校/社区发生了什么具体改变？（比如：我组织了一个编程社团，让30个零基础同学学会Python并做了小项目）" maxlength="150" value="{{influenceDesc}}" bindinput="onInfluenceInput" auto-height />
+    </view>
+
+    <view class="form-group">
+      <text class="label">领导角色</text>
+      <picker mode="selector" range="{{leaderOptions}}" value="{{leaderIndex}}" bindchange="onLeaderChange">
+        <view class="picker">
+          <text class="{{leaderRole ? '' : 'picker-placeholder'}}">{{leaderRole || '请选择领导角色'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">升学指导推荐信</text>
+      <picker mode="selector" range="{{counselorOptions}}" value="{{counselorIndex}}" bindchange="onCounselorChange">
+        <view class="picker">
+          <text class="{{counselorRec ? '' : 'picker-placeholder'}}">{{counselorRec || '请选择推荐信预期'}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <text class="step-why-hint">美国大学非常看重社群（Community）。招生官在评估：如果你加入我们，你能给我们的班级和宿舍带来什么？</text>
+
+  <button class="btn-primary" bindtap="submitStep">下一步</button>
+</view>

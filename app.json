@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/step1/step1",
+    "pages/step2/step2",
+    "pages/step3/step3",
+    "pages/step4/step4",
+    "pages/step5/step5",
+    "pages/report/report"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1B2A4A",
+    "navigationBarTitleText": "睿顺·留学罗盘",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F7F6F3"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

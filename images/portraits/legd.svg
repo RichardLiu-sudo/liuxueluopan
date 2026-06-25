@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <circle cx="100" cy="68" r="45" fill="none" stroke="#3A5078" stroke-width="2"/>
+    <path d="M 60 90 L 55 60 L 75 75 L 100 45 L 125 75 L 145 60 L 140 90 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="100" cy="48" r="5" fill="#3A5078"/>
+    <circle cx="75" cy="72" r="4" fill="#3A5078"/>
+    <circle cx="125" cy="72" r="4" fill="#3A5078"/>
+    <rect x="55" y="90" width="90" height="12" rx="4" fill="#C9A96E"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#1B2A4A"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">LEGD</text>
+  </g>
+</svg>

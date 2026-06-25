@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <circle cx="100" cy="72" r="48" fill="none" stroke="#1B2A4A" stroke-width="1.5"/>
+    <polygon points="100.0,54.0 95.3,65.5 82.9,66.4 92.4,74.5 89.4,86.6 100.0,80.0 110.6,86.6 107.6,74.5 117.1,66.4 104.7,65.5" fill="#C9A96E" stroke-linejoin="round"/>
+    <circle cx="70" cy="110" r="3" fill="#3A5078"/>
+    <circle cx="130" cy="110" r="3" fill="#3A5078"/>
+    <circle cx="100" cy="115" r="2" fill="#3A5078"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#C9A96E"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">STAR</text>
+  </g>
+</svg>

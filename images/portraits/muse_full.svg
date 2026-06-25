@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="600" height="800" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <!-- Card background -->
+    <rect x="0" y="0" width="600" height="800" rx="20" fill="#F7F6F3"/>
+    
+    <!-- Top stripe -->
+    <rect x="0" y="0" width="600" height="12" fill="#1B2A4A"/>
+    
+    <!-- Group badge top-right -->
+    <rect x="420" y="30" width="160" height="36" rx="18" fill="#C9A96E" opacity="0.15"/>
+    <text x="500" y="53" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#C9A96E" font-weight="600">全能领跑群</text>
+    
+    <!-- Character area -->
+    <g transform="translate(300, 280)">
+    <circle cx="0" cy="-85" r="44" fill="#F7F6F3" stroke="#1B2A4A" stroke-width="3"/>
+    <circle cx="-15" cy="-93" r="4" fill="#1B2A4A"/><circle cx="15" cy="-93" r="4" fill="#1B2A4A"/>
+    <path d="M-12,-72 Q0,-62 12,-72" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="-50,-30 50,-30 60,70 -60,70" fill="#3A5078" stroke="#1B2A4A" stroke-width="2"/>
+    <path d="M-25,-15 Q-40,45 -25,60" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M25,-15 Q40,45 25,60" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="-25" cy="-15" r="6" fill="#C9A96E"/><circle cx="25" cy="-15" r="6" fill="#C9A96E"/>
+    <circle cx="0" cy="25" r="10" fill="#C9A96E" opacity="0.5"/>
+    <text x="0" y="30" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1B2A4A">♫</text>
+    </g>
+    
+    <!-- Code - large -->
+    <text x="300" y="440" text-anchor="middle" font-family="sans-serif" font-size="56" font-weight="800" fill="#1B2A4A" letter-spacing="8">MUSE</text>
+    
+    <!-- Name -->
+    <text x="300" y="488" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#1B2A4A">缪斯</text>
+    
+    <!-- Tagline -->
+    <rect x="80" y="510" width="440" height="44" rx="8" fill="#1B2A4A" opacity="0.05"/>
+    <text x="300" y="538" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3A5078" font-style="italic">"审美与逻辑在同一个人身上达到巅峰"</text>
+    
+    <!-- Divider line -->
+    <line x1="120" y1="570" x2="480" y2="570" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Description lines -->
+    <text x="120" y="600" font-family="sans-serif" font-size="17" fill="#5A6A82">• 卡内基音乐厅独奏经历</text>
+    <text x="120" y="632" font-family="sans-serif" font-size="17" fill="#5A6A82">• USACO铂金组</text>
+    <text x="120" y="664" font-family="sans-serif" font-size="17" fill="#5A6A82">• 艺术与技术的奇妙组合</text>
+    <text x="120" y="696" font-family="sans-serif" font-size="17" fill="#5A6A82">• 挑战：别让人以为"什么都想做"</text>
+    <text x="120" y="728" font-family="sans-serif" font-size="17" fill="#5A6A82">• 建议：串联活动形成清晰主线</text>
+
+    <!-- Bottom accent bar -->
+    <rect x="0" y="788" width="600" height="12" fill="#C9A96E" opacity="0.7"/>
+    
+    <!-- Brand mark -->
+    <text x="300" y="750" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#3A5078" opacity="0.5">留学罗盘 · 睿顺国际</text>
+    
+  </g>
+</svg>

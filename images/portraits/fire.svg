@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <path d="M 100 25 Q 80 55 70 75 Q 60 95 80 105 Q 95 112 100 95 Q 105 112 120 105 Q 140 95 130 75 Q 120 55 100 25 Z" fill="#C9A96E" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 100 40 Q 85 65 80 80 Q 75 95 90 100 Q 98 105 100 92 Q 102 105 110 100 Q 125 95 120 80 Q 115 65 100 40 Z" fill="#3A5078" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 55 60 Q 50 80 55 90 Q 60 80 55 60 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 145 55 Q 140 75 145 88 Q 150 78 145 55 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#C9A96E"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">FIRE</text>
+  </g>
+</svg>

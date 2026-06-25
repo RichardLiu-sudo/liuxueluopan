@@ -1,0 +1,230 @@
+/* ===== 睿顺国际品牌色系 =====
+  主色：   #1B2A4A  深藏蓝 — 沉稳专业
+  辅助色： #3A5078  钢蓝   — 次级元素
+  强调色： #C9A96E  暖金   — 关键按钮 / 数据高亮
+  背景色： #F7F6F3  暖灰白 — 页面底色
+  卡片色： #FFFFFF  白     — 卡片底色
+  文字主色：#1B2A4A  深藏蓝
+  文字次色：#5A6A82  钢灰
+  文字弱色：#8A98AE  浅灰
+  分割线： #E8E5DF  暖灰线
+  优势色： #3A7D5A  暗绿   — 正面不刺眼
+  不足色： #5A6A82  钢灰   — 不用红色
+  反馈边框：#3A5078  钢蓝   — 顾问信笺感
+============================================= */
+
+page {
+  background-color: #F7F6F3;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Noto Serif SC', serif;
+  color: #1B2A4A;
+  font-size: 28rpx;
+}
+
+/* ===== 按钮体系 ===== */
+.btn-primary {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: #1B2A4A;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  border-radius: 8rpx;
+  border: none;
+  margin-top: 32rpx;
+}
+.btn-primary:active { background: #15203B; }
+
+.btn-gold {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: #C9A96E;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  border-radius: 8rpx;
+  border: none;
+  margin-top: 32rpx;
+}
+.btn-gold:active { background: #B89A5E; }
+
+.btn-steel {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: #3A5078;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  border-radius: 8rpx;
+  border: none;
+  margin-top: 32rpx;
+}
+.btn-steel:active { background: #2E4162; }
+
+.btn-outline {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: transparent;
+  color: #3A5078;
+  font-size: 30rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid #3A5078;
+}
+
+/* ===== 反馈卡片 — 顾问信笺风格 ===== */
+.feedback-card {
+  background: #FFFFFF;
+  border-left: 3rpx solid #3A5078;
+  border-radius: 8rpx;
+  padding: 28rpx 32rpx;
+  margin-top: 32rpx;
+}
+.feedback-card .feedback-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1B2A4A;
+  letter-spacing: 1rpx;
+}
+.feedback-card .feedback-body {
+  font-size: 28rpx;
+  color: #5A6A82;
+  line-height: 1.85;
+  margin-top: 16rpx;
+}
+.feedback-card .feedback-suggestion {
+  font-size: 26rpx;
+  color: #8A98AE;
+  line-height: 1.6;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #E8E5DF;
+}
+
+/* ===== 步骤进度点 — 极简圆点+线 ===== */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 0;
+  gap: 0;
+}
+.step-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #E8E5DF;
+  margin: 0;
+  transition: all 0.25s;
+}
+.step-dot.active {
+  background: #1B2A4A;
+  width: 18rpx;
+  height: 18rpx;
+}
+.step-dot.done {
+  background: #C9A96E;
+  width: 14rpx;
+  height: 14rpx;
+}
+
+/* ===== 步骤进度条 ===== */
+.step-progress-bar {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0 20rpx;
+  gap: 16rpx;
+}
+.step-progress-label {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #1B2A4A;
+  white-space: nowrap;
+}
+.step-progress-grid {
+  display: flex;
+  flex: 1;
+  gap: 6rpx;
+}
+.step-progress-cell {
+  flex: 1;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: #E8E5DF;
+  transition: background 0.3s;
+}
+.step-progress-cell.cell-done {
+  background: #1B2A4A;
+}
+.step-progress-cell.cell-active {
+  background: #3A5078;
+}
+
+/* ===== 步骤解释提示 ===== */
+.step-why-hint {
+  font-size: 22rpx;
+  color: #8A98AE;
+  line-height: 1.6;
+  margin-top: 8rpx;
+  padding-left: 2rpx;
+}
+
+/* ===== 页面进入动画（优化12） ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scoreScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== 输入框错误状态（优化14） ===== */
+.input-error {
+  border-color: #D4886B !important;
+  transition: border-color 0.3s;
+}
+
+/* ===== 品牌标识（优化15） ===== */
+.brand-footer {
+  text-align: center;
+  padding: 40rpx 0 20rpx;
+}
+.brand-footer-text {
+  font-size: 22rpx;
+  color: #8A98AE;
+  display: block;
+}
+.brand-footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  margin-top: 8rpx;
+}
+.brand-logo-placeholder {
+  width: 32rpx;
+  height: 32rpx;
+  background: #1B2A4A;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-logo-text {
+  font-size: 18rpx;
+  color: #C9A96E;
+  font-weight: 700;
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <rect x="55" y="55" width="80" height="70" rx="6" fill="#3A5078"/>
+    <rect x="58" y="58" width="74" height="64" rx="4" fill="#F7F6F3"/>
+    <circle cx="80" cy="80" r="10" fill="#C9A96E"/>
+    <path d="M 100 75 L 115 90 L 110 100 L 95 95 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="85" y1="105" x2="120" y2="100" stroke="#3A5078" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="140" y="40" width="6" height="50" rx="3" fill="#C9A96E"/>
+    <path d="M 143 40 Q 150 30 155 28 L 157 30 Q 152 34 146 42 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#3A5078"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">ARTS</text>
+  </g>
+</svg>

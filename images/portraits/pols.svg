@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <circle cx="100" cy="75" r="55" fill="none" stroke="#1B2A4A" stroke-width="2"/>
+    <circle cx="100" cy="75" r="45" fill="none" stroke="#3A5078" stroke-width="1.5"/>
+    <path d="M 100 30 L 108 68 L 148 75 L 108 82 L 100 120 L 92 82 L 52 75 L 92 68 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="100" cy="75" r="8" fill="#C9A96E"/>
+    <path d="M 100 75 L 100 38" fill="#C9A96E" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#1B2A4A"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">POLS</text>
+  </g>
+</svg>

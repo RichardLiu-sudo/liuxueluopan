@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <path d="M 85 45 L 85 80 Q 60 110 70 130 Q 80 140 100 140 Q 120 140 130 130 Q 140 110 115 80 L 115 45 Z" fill="none" stroke="#3A5078" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 72 115 Q 100 105 128 115" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="90" cy="105" r="4" fill="#C9A96E"/>
+    <circle cx="105" cy="95" r="3" fill="#C9A96E"/>
+    <circle cx="95" cy="120" r="2.5" fill="#F7F6F3"/>
+    <rect x="82" y="30" width="36" height="10" rx="5" fill="#3A5078"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#3A5078"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">LABS</text>
+  </g>
+</svg>

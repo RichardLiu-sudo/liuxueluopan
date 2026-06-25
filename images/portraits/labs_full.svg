@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="600" height="800" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <!-- Card background -->
+    <rect x="0" y="0" width="600" height="800" rx="20" fill="#F7F6F3"/>
+    
+    <!-- Top stripe -->
+    <rect x="0" y="0" width="600" height="12" fill="#1B2A4A"/>
+    
+    <!-- Group badge top-right -->
+    <rect x="420" y="30" width="160" height="36" rx="18" fill="#C9A96E" opacity="0.15"/>
+    <text x="500" y="53" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#C9A96E" font-weight="600">剑走偏锋群</text>
+    
+    <!-- Character area -->
+    <g transform="translate(300, 280)">
+    <circle cx="0" cy="-85" r="43" fill="#F7F6F3" stroke="#1B2A4A" stroke-width="3"/>
+    <rect x="-12" y="-93" width="10" height="10" rx="2" fill="#1B2A4A"/>
+    <rect x="2" y="-93" width="10" height="10" rx="2" fill="#1B2A4A"/>
+    <line x1="-5" y1="-70" x2="5" y2="-70" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="-45,-30 45,-30 55,70 -55,70" fill="#3A5078" stroke="#1B2A4A" stroke-width="2"/>
+    <rect x="-20" y="-10" width="16" height="14" rx="3" fill="#C9A96E" opacity="0.5"/>
+    <rect x="2" y="-10" width="16" height="14" rx="3" fill="#C9A96E" opacity="0.7"/>
+    <rect x="-20" y="22" width="16" height="14" rx="3" fill="#C9A96E" opacity="0.6"/>
+    <rect x="2" y="22" width="16" height="14" rx="3" fill="#C9A96E" opacity="0.8"/>
+    <circle cx="0" cy="50" r="3" fill="#F7F6F3"/>
+    </g>
+    
+    <!-- Code - large -->
+    <text x="300" y="440" text-anchor="middle" font-family="sans-serif" font-size="56" font-weight="800" fill="#1B2A4A" letter-spacing="8">LABS</text>
+    
+    <!-- Name -->
+    <text x="300" y="488" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#1B2A4A">实验室幽灵</text>
+    
+    <!-- Tagline -->
+    <rect x="80" y="510" width="440" height="44" rx="8" fill="#1B2A4A" opacity="0.05"/>
+    <text x="300" y="538" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3A5078" font-style="italic">"论文三篇、成果一项、朋友零个"</text>
+    
+    <!-- Divider line -->
+    <line x1="120" y1="570" x2="480" y2="570" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Description lines -->
+    <text x="120" y="600" font-family="sans-serif" font-size="17" fill="#5A6A82">• 两篇SCI论文 / 一项专利</text>
+    <text x="120" y="632" font-family="sans-serif" font-size="17" fill="#5A6A82">• 跟大学教授做研究</text>
+    <text x="120" y="664" font-family="sans-serif" font-size="17" fill="#5A6A82">• 学术深度让研究生自愧不如</text>
+    <text x="120" y="696" font-family="sans-serif" font-size="17" fill="#5A6A82">• 挑战：活动列表只有科研</text>
+    <text x="120" y="728" font-family="sans-serif" font-size="17" fill="#5A6A82">• 建议：展示实验之外的自己</text>
+
+    <!-- Bottom accent bar -->
+    <rect x="0" y="788" width="600" height="12" fill="#C9A96E" opacity="0.7"/>
+    
+    <!-- Brand mark -->
+    <text x="300" y="750" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#3A5078" opacity="0.5">留学罗盘 · 睿顺国际</text>
+    
+  </g>
+</svg>

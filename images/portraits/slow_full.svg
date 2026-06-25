@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="600" height="800" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <!-- Card background -->
+    <rect x="0" y="0" width="600" height="800" rx="20" fill="#F7F6F3"/>
+    
+    <!-- Top stripe -->
+    <rect x="0" y="0" width="600" height="12" fill="#1B2A4A"/>
+    
+    <!-- Group badge top-right -->
+    <rect x="420" y="30" width="160" height="36" rx="18" fill="#C9A96E" opacity="0.15"/>
+    <text x="500" y="53" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#C9A96E" font-weight="600">稳步前进群</text>
+    
+    <!-- Character area -->
+    <g transform="translate(300, 280)">
+    <circle cx="0" cy="-85" r="43" fill="#F7F6F3" stroke="#1B2A4A" stroke-width="3"/>
+    <circle cx="-14" cy="-93" r="4" fill="#1B2A4A"/><circle cx="14" cy="-93" r="4" fill="#1B2A4A"/>
+    <path d="M-10,-72 Q0,-64 10,-72" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="-45,-30 45,-30 55,70 -55,70" fill="#3A5078" stroke="#1B2A4A" stroke-width="2"/>
+    <path d="M-30,40 L-15,20 L0,10 L15,20 L30,40" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="0,-15 -8,-3 8,-3" fill="#C9A96E"/>
+    <circle cx="-30" cy="40" r="3" fill="#C9A96E"/><circle cx="0" cy="10" r="4" fill="#C9A96E"/><circle cx="30" cy="40" r="5" fill="#C9A96E"/>
+    <text x="30" y="56" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#F7F6F3" font-weight="600">NOW</text>
+    </g>
+    
+    <!-- Code - large -->
+    <text x="300" y="440" text-anchor="middle" font-family="sans-serif" font-size="56" font-weight="800" fill="#1B2A4A" letter-spacing="8">SLOW</text>
+    
+    <!-- Name -->
+    <text x="300" y="488" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#1B2A4A">慢行者</text>
+    
+    <!-- Tagline -->
+    <rect x="80" y="510" width="440" height="44" rx="8" fill="#1B2A4A" opacity="0.05"/>
+    <text x="300" y="538" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3A5078" font-style="italic">"起步比别人晚，但加速度不一样"</text>
+    
+    <!-- Divider line -->
+    <line x1="120" y1="570" x2="480" y2="570" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Description lines -->
+    <text x="120" y="600" font-family="sans-serif" font-size="17" fill="#5A6A82">• 高一高二GPA 3.0</text>
+    <text x="120" y="632" font-family="sans-serif" font-size="17" fill="#5A6A82">• 高三觉醒成绩攀升</text>
+    <text x="120" y="664" font-family="sans-serif" font-size="17" fill="#5A6A82">• 成绩曲线向上爬升</text>
+    <text x="120" y="696" font-family="sans-serif" font-size="17" fill="#5A6A82">• 优势：成长轨迹打动招生官</text>
+    <text x="120" y="728" font-family="sans-serif" font-size="17" fill="#5A6A82">• 建议：文书直面早期成绩讲转折故事</text>
+
+    <!-- Bottom accent bar -->
+    <rect x="0" y="788" width="600" height="12" fill="#C9A96E" opacity="0.7"/>
+    
+    <!-- Brand mark -->
+    <text x="300" y="750" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#3A5078" opacity="0.5">留学罗盘 · 睿顺国际</text>
+    
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<view class="container">
+  <view class="step-header">
+    <text class="step-badge">步骤 {{step}}/{{totalSteps}}</text>
+    <text class="step-title">学术成绩</text>
+    <text class="step-desc">GPA + 课程体系评估</text>
+    <text class="step-explain">GPA是美国本科录取最核心的学术指标，直接影响学校层级判断。</text>
+  </view>
+
+  <!-- 进度条 -->
+  <view class="progress-bar-wrap">
+    <text class="progress-label">第 {{step}}/{{totalSteps}} 步</text>
+    <view class="progress-bar">
+      <view class="progress-seg done" wx:for="{{[1,2,3,4,5,6]}}" wx:key="*this" wx:if="{{index < step}}"></view>
+      <view class="progress-seg active" wx:if="{{index === step - 1}}"></view>
+      <view class="progress-seg" wx:if="{{index >= step}}"></view>
+    </view>
+  </view>
+
+  <view class="form">
+    <view class="form-group">
+      <text class="label">GPA（4.0分制）</text>
+      <picker mode="selector" bindchange="onGpaRangeChange" value="{{gpaRangeIndex}}" range="{{gpaRanges}}">
+        <view class="picker">{{gpaRanges[gpaRangeIndex]}}</view>
+      </picker>
+      <view class="custom-toggle" wx:if="{{gpaRangeIndex === gpaRanges.length - 1}}">
+        <input class="input" type="digit" placeholder="请输入精确GPA 如 3.80" value="{{gpaCustom}}" bindinput="onGpaCustomInput" bindblur="onGpaCustomBlur"/>
+      </view>
+      <view class="custom-link" wx:if="{{gpaRangeIndex !== gpaRanges.length - 1}}" bindtap="showGpaCustom">
+        <text class="custom-link-text">自定义精确值</text>
+      </view>
+    </view>
+    <view class="form-group">
+      <text class="label">课程体系</text>
+      <picker mode="selector" bindchange="onCurriculumChange" value="{{curriculumIndex}}" range="{{curriculums}}">
+        <view class="picker">{{curriculums[curriculumIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-group" wx:if="{{curriculums[curriculumIndex] === 'AP' || curriculums[curriculumIndex] === 'IB'}}">
+      <text class="label">{{curriculums[curriculumIndex]}} 门数</text>
+      <input class="input" type="number" placeholder="如 5" value="{{apCount}}" bindinput="onApCountInput"/>
+      <view class="skip-tag {{apCountSkipped ? 'skip-active' : ''}}" bindtap="skipApCount">不适用</view>
+    </view>
+    <view class="form-group">
+      <text class="label-hint">若无AP/IB课程，请在课程体系中选择"普通高中课程"</text>
+    </view>
+  </view>
+
+  <button class="btn-primary" bindtap="submitStep" wx:if="{{!showFeedback}}">
+    提交，查看反馈
+  </button>
+
+  <view class="feedback-card" wx:if="{{showFeedback}}">
+    <text class="feedback-title">{{feedbackData.title}}</text>
+    <text class="feedback-body">{{feedbackData.body}}</text>
+    <text class="feedback-suggestion">行动建议：{{feedbackData.suggestion}}</text>
+  </view>
+
+  <button class="btn-primary" bindtap="nextStep" wx:if="{{showFeedback}}">
+    下一步：标化考试
+  </button>
+</view>

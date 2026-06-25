@@ -1,0 +1,57 @@
+<view class="container">
+  <!-- 进度条 -->
+  <view class="step-progress-bar">
+    <text class="step-progress-label">第 {{step}}/5 步</text>
+    <view class="step-progress-grid">
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-active"></view>
+    </view>
+  </view>
+
+  <view class="step-header">
+    <text class="step-badge">步骤 {{step}}/{{totalSteps}}</text>
+    <text class="step-title">偏好设置</text>
+    <text class="step-desc">个性化匹配你的梦校</text>
+    <text class="step-why-hint">偏好设置帮助我们筛选更适合你的学校，所有选项均可多选。</text>
+  </view>
+
+  <view class="step-indicator">
+    <view class="step-dot done"></view><view class="step-dot done"></view>
+    <view class="step-dot done"></view><view class="step-dot done"></view>
+    <view class="step-dot active"></view>
+  </view>
+
+  <view class="form">
+    <view class="form-group">
+      <text class="label">地理位置偏好（多选）</text>
+      <view class="tag-grid">
+        <view class="tag {{item.checked ? 'tag-active' : ''}}" wx:for="{{regions}}" wx:key="name" data-index="{{index}}" bindtap="toggleRegion">{{item.name}}</view>
+      </view>
+    </view>
+    <view class="form-group">
+      <text class="label">学校规模</text>
+      <picker mode="selector" bindchange="onSizeChange" value="{{sizeIndex}}" range="{{sizes}}">
+        <view class="picker">{{sizes[sizeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="label">公立/私立</text>
+      <picker mode="selector" bindchange="onTypeChange" value="{{typeIndex}}" range="{{schoolTypes}}">
+        <view class="picker">{{schoolTypes[typeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="label">学费预算（年）</text>
+      <picker mode="selector" bindchange="onTuitionChange" value="{{tuitionIndex}}" range="{{tuitions}}">
+        <view class="picker">{{tuitions[tuitionIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <button class="btn-primary" bindtap="submitAll">
+    完成测评，生成选校报告
+  </button>
+</view>

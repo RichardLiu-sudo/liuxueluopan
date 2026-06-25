@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <path d="M 65 120 L 70 95 L 130 95 L 135 120 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="60" y="120" width="80" height="6" rx="2" fill="#4A6A8A"/>
+    <path d="M 100 95 Q 100 60 85 45 Q 100 65 100 95" fill="#C9A96E" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 100 95 Q 100 50 120 40 Q 105 60 100 95" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 40 110 L 55 95 L 55 105 L 70 90 L 70 100 L 85 85" fill="none" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#4A6A8A"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">SLOW</text>
+  </g>
+</svg>

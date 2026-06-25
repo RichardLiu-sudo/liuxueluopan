@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="step-progress-bar">
+    <text class="step-progress-label">第 5/5 步</text>
+    <view class="step-progress-grid">
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-active"></view>
+    </view>
+  </view>
+
+  <view class="step-header">
+    <text class="step-badge">Step 5</text>
+    <text class="step-title">学校偏好</text>
+    <text class="step-desc">告诉我们你的偏好，帮你精准匹配院校</text>
+  </view>
+
+  <view class="step-indicator">
+    <view class="step-dot done"></view>
+    <view class="step-dot done"></view>
+    <view class="step-dot done"></view>
+    <view class="step-dot done"></view>
+    <view class="step-dot active"></view>
+  </view>
+
+  <view class="form">
+    <view class="form-group">
+      <text class="label">地理位置偏好（多选）</text>
+      <view class="tag-grid">
+        <view class="tag {{regions.indexOf(item)>-1 ? 'tag-active' : ''}}" wx:for="{{regionOptions}}" wx:key="*this" data-item="{{item}}" bindtap="onRegionToggle">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <text class="label">学校规模</text>
+      <picker mode="selector" range="{{sizeOptions}}" value="{{sizeIndex}}" bindchange="onSizeChange">
+        <view class="picker">
+          <text class="{{size ? '' : 'picker-placeholder'}}">{{size || '请选择学校规模偏好'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">学校类型</text>
+      <picker mode="selector" range="{{typeOptions}}" value="{{typeIndex}}" bindchange="onTypeChange">
+        <view class="picker">
+          <text class="{{schoolType ? '' : 'picker-placeholder'}}">{{schoolType || '请选择学校类型偏好'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">学费预算</text>
+      <picker mode="selector" range="{{tuitionOptions}}" value="{{tuitionIndex}}" bindchange="onTuitionChange">
+        <view class="picker">
+          <text class="{{tuition ? '' : 'picker-placeholder'}}">{{tuition || '请选择学费预算范围'}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <text class="step-why-hint">偏好设置帮你从院校库中筛选更匹配的学校。跳过任何一项都不影响评分，但会扩大推荐范围。偏好宽松 → 更多选择；偏好精确 → 更精准匹配。</text>
+
+  <button class="btn-gold" bindtap="submitAll">生成我的报告</button>
+</view>

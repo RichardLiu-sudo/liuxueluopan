@@ -1,0 +1,71 @@
+<view class="container">
+  <view class="step-progress-bar">
+    <text class="step-progress-label">第 4/5 步</text>
+    <view class="step-progress-grid">
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-done"></view>
+      <view class="step-progress-cell cell-active"></view>
+      <view class="step-progress-cell"></view>
+    </view>
+  </view>
+
+  <view class="step-header">
+    <text class="step-badge">Step 4</text>
+    <text class="step-title">个人特质与抗挫折力</text>
+    <text class="step-desc">满分 15 分 — 往往是最后决定录取的关键</text>
+  </view>
+
+  <view class="step-indicator">
+    <view class="step-dot done"></view>
+    <view class="step-dot done"></view>
+    <view class="step-dot done"></view>
+    <view class="step-dot active"></view>
+    <view class="step-dot"></view>
+  </view>
+
+  <view class="form">
+    <view class="form-group">
+      <text class="label">关键成长事件/挑战（选填，最多200字）</text>
+      <textarea class="textarea-field" placeholder="描述一个对你影响最大的经历或挑战（比如：高二时父亲失业，我开始做家教帮补家用，反而让我发现了对教育的热爱）" maxlength="200" value="{{growthEvent}}" bindinput="onEventInput" auto-height />
+    </view>
+
+    <view class="form-group">
+      <text class="label">自我认知标签（多选）</text>
+      <view class="tag-grid">
+        <view class="tag {{item.checked ? 'tag-active' : ''}}" wx:for="{{tagOptions}}" wx:key="value" data-index="{{index}}" bindtap="onTagToggle">{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <text class="label">家庭背景 Context</text>
+      <picker mode="selector" range="{{contextOptions}}" value="{{familyIndex}}" bindchange="onFamilyChange">
+        <view class="picker">
+          <text class="{{familyContext ? '' : 'picker-placeholder'}}">{{familyContext || '请选择家庭背景'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">语言能力</text>
+      <picker mode="selector" range="{{languageOptions}}" value="{{languageIndex}}" bindchange="onLanguageChange">
+        <view class="picker">
+          <text class="{{language ? '' : 'picker-placeholder'}}">{{language || '请选择语言成绩区间'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">面试信心</text>
+      <picker mode="selector" range="{{interviewOptions}}" value="{{interviewIndex}}" bindchange="onInterviewChange">
+        <view class="picker">
+          <text class="{{interviewConfidence ? '' : 'picker-placeholder'}}">{{interviewConfidence || '请评估你的面试状态'}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <text class="step-why-hint">这个维度最抽象，却往往是最后决定录取的关键。招生官通过文书和面试听你"真正的声音"——内省能力、幽默感、同理心、面对逆境的韧性。</text>
+
+  <button class="btn-primary" bindtap="submitStep">下一步</button>
+</view>

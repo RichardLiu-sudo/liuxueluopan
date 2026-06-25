@@ -1,0 +1,73 @@
+<view class="container">
+  <view class="step-progress-bar">
+    <text class="step-progress-label">第 1/5 步</text>
+    <view class="step-progress-grid">
+      <view class="step-progress-cell cell-active"></view>
+      <view class="step-progress-cell"></view>
+      <view class="step-progress-cell"></view>
+      <view class="step-progress-cell"></view>
+      <view class="step-progress-cell"></view>
+    </view>
+  </view>
+
+  <view class="step-header">
+    <text class="step-badge">Step 1</text>
+    <text class="step-title">认知天花板与学术潜能</text>
+    <text class="step-desc">满分 40 分 — 评估你在现有环境下是否把学术挑战推到了极致</text>
+  </view>
+
+  <view class="step-indicator">
+    <view class="step-dot active"></view>
+    <view class="step-dot"></view>
+    <view class="step-dot"></view>
+    <view class="step-dot"></view>
+    <view class="step-dot"></view>
+  </view>
+
+  <view class="form">
+    <view class="form-group">
+      <text class="label">GPA 区间</text>
+      <picker mode="selector" range="{{gpaOptions}}" value="{{gpaIndex}}" bindchange="onGpaChange">
+        <view class="picker">
+          <text class="{{gpaRange ? '' : 'picker-placeholder'}}">{{gpaRange || '请选择 GPA 区间'}}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="label">课程体系</text>
+      <picker mode="selector" range="{{curriculumOptions}}" value="{{curriculumIndex}}" bindchange="onCurriculumChange">
+        <view class="picker">
+          <text class="{{curriculum ? '' : 'picker-placeholder'}}">{{curriculum || '请选择课程体系'}}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="label">SAT / ACT 区间</text>
+      <picker mode="selector" range="{{satActOptions}}" value="{{satActIndex}}" bindchange="onSatActChange">
+        <view class="picker">
+          <text class="{{satActRange ? '' : 'picker-placeholder'}}">{{satActRange || '请选择 SAT/ACT 区间'}}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="label">学术竞赛经历</text>
+      <picker mode="selector" range="{{competitionOptions}}" value="{{competitionIndex}}" bindchange="onCompetitionChange">
+        <view class="picker">
+          <text class="{{competition ? '' : 'picker-placeholder'}}">{{competition || '请选择最高竞赛级别'}}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="label">课程难度自评</text>
+      <picker mode="selector" range="{{rigorOptions}}" value="{{courseRigorIndex}}" bindchange="onRigorChange">
+        <view class="picker">
+          <text class="{{courseRigor ? '' : 'picker-placeholder'}}">{{courseRigor || '请评估你的课程难度'}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <text class="step-why-hint">招生官不只看你的分数，更看你在现有环境下是否把学术挑战推到了极致。选了最难的课且拿到好成绩，比简单课满分更有说服力。</text>
+
+  <button class="btn-primary" bindtap="submitStep">下一步</button>
+</view>

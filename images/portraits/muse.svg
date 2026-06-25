@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="200" height="200" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="24" ry="24" fill="#F7F6F3"/>
+  <g clip-path="url(#card)">
+
+    <path d="M 100 30 Q 150 30 155 80 Q 160 130 100 140 Q 40 130 45 80 Q 50 30 100 30 Z" fill="#1B2A4A" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="70" cy="70" r="10" fill="#C9A96E"/>
+    <circle cx="100" cy="55" r="8" fill="#3A5078"/>
+    <circle cx="130" cy="70" r="10" fill="#E07B5A"/>
+    <circle cx="80" cy="100" r="7" fill="#5A9E6F"/>
+    <circle cx="120" cy="100" r="8" fill="#8B6BAE"/>
+    <rect x="85" y="45" width="6" height="35" rx="3" fill="#F7F6F3"/>
+    <rect x="50" y="152" width="100" height="24" rx="12" fill="#1B2A4A"/>
+    <text x="100" y="169" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#F7F6F3" font-weight="bold">MUSE</text>
+  </g>
+</svg>

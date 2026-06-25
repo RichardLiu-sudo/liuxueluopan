@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="600" height="800" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <!-- Card background -->
+    <rect x="0" y="0" width="600" height="800" rx="20" fill="#F7F6F3"/>
+    
+    <!-- Top stripe -->
+    <rect x="0" y="0" width="600" height="12" fill="#1B2A4A"/>
+    
+    <!-- Group badge top-right -->
+    <rect x="420" y="30" width="160" height="36" rx="18" fill="#3A7D5A" opacity="0.15"/>
+    <text x="500" y="53" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#3A7D5A" font-weight="600">稳步前进群</text>
+    
+    <!-- Character area -->
+    <g transform="translate(300, 280)">
+
+<circle cx="0" cy="-80" r="45" fill="#F7F6F3" stroke="#1B2A4A" stroke-width="3"/>
+<rect x="-44" y="-123" width="88" height="12" rx="6" fill="#3A7D5A"/>
+<circle cx="-18" cy="-88" r="10" fill="none" stroke="#1B2A4A" stroke-width="2"/>
+<circle cx="18" cy="-88" r="10" fill="none" stroke="#1B2A4A" stroke-width="2"/>
+<line x1="-8" y1="-88" x2="8" y2="-88" stroke="#1B2A4A" stroke-width="1.5"/>
+<circle cx="-18" cy="-88" r="2.5" fill="#1B2A4A"/>
+<circle cx="18" cy="-88" r="2.5" fill="#1B2A4A"/>
+<path d="M-10,-65 Q0,-56 10,-65" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round"/>
+<rect x="-40" y="-30" width="80" height="95" rx="4" fill="#3A7D5A" stroke="#1B2A4A" stroke-width="2"/>
+<polygon points="0,-30 -12,15 0,35 12,15" fill="#F7F6F3"/>
+<path d="M-15,55 L-5,62 L18,42" fill="none" stroke="#F7F6F3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    
+    <!-- Code - large -->
+    <text x="300" y="440" text-anchor="middle" font-family="sans-serif" font-size="56" font-weight="800" fill="#1B2A4A" letter-spacing="8">STED</text>
+    
+    <!-- Name -->
+    <text x="300" y="488" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#1B2A4A">稳行者</text>
+    
+    <!-- Tagline -->
+    <rect x="80" y="510" width="440" height="44" rx="8" fill="#1B2A4A" opacity="0.05"/>
+    <text x="300" y="538" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3A5078" font-style="italic">"不大声喧哗，但每一步都踩得实"</text>
+    
+    <!-- Divider line -->
+    <line x1="120" y1="570" x2="480" y2="570" stroke="#3A7D5A" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Description lines -->
+
+    <text x="120" y="600" font-family="sans-serif" font-size="17" fill="#5A6A82">• GPA 3.7 / SAT 1420</text>
+    <text x="120" y="632" font-family="sans-serif" font-size="17" fill="#5A6A82">• 三段常规活动，两封不错推荐信</text>
+    <text x="120" y="664" font-family="sans-serif" font-size="17" fill="#5A6A82">• 好学生的范本，但缺少记忆点</text>
+    <text x="120" y="696" font-family="sans-serif" font-size="17" fill="#5A6A82">• 突破口：找一个微小但独特的故事</text>
+    <text x="120" y="728" font-family="sans-serif" font-size="17" fill="#5A6A82">• 用细节比宏大叙事更能脱颖而出</text>
+
+    <!-- Bottom accent bar -->
+    <rect x="0" y="788" width="600" height="12" fill="#3A7D5A" opacity="0.7"/>
+    
+    <!-- Brand mark -->
+    <text x="300" y="750" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#3A5078" opacity="0.5">留学罗盘 · 睿顺国际</text>
+    
+  </g>
+</svg>

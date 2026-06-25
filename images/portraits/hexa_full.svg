@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="600" height="800" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <!-- Card background -->
+    <rect x="0" y="0" width="600" height="800" rx="20" fill="#F7F6F3"/>
+    
+    <!-- Top stripe -->
+    <rect x="0" y="0" width="600" height="12" fill="#1B2A4A"/>
+    
+    <!-- Group badge top-right -->
+    <rect x="420" y="30" width="160" height="36" rx="18" fill="#C9A96E" opacity="0.15"/>
+    <text x="500" y="53" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#C9A96E" font-weight="600">全能领跑群</text>
+    
+    <!-- Character area -->
+    <g transform="translate(300, 280)">
+
+<polygon points="0.0,-170.0 26.0,-155.0 26.0,-125.0 0.0,-110.0 -26.0,-125.0 -26.0,-155.0" fill="#C9A96E" stroke="#1B2A4A" stroke-width="2"/>
+<circle cx="0" cy="-80" r="45" fill="#F7F6F3" stroke="#1B2A4A" stroke-width="3"/>
+<circle cx="-16" cy="-88" r="5" fill="#1B2A4A"/>
+<circle cx="16" cy="-88" r="5" fill="#1B2A4A"/>
+<path d="M-12,-68 Q0,-56 12,-68" fill="none" stroke="#1B2A4A" stroke-width="2.5" stroke-linecap="round"/>
+<polygon points="-55,-30 55,-30 65,70 -65,70" fill="#3A5078" stroke="#1B2A4A" stroke-width="2"/>
+<polygon points="0,-35 -20,-22 20,-22" fill="#C9A96E"/>
+<circle cx="22.0" cy="20.0" r="4" fill="#F7F6F3"/>
+<circle cx="11.0" cy="35.6" r="4" fill="#F7F6F3"/>
+<circle cx="-11.0" cy="35.6" r="4" fill="#F7F6F3"/>
+<circle cx="-22.0" cy="20.0" r="4" fill="#F7F6F3"/>
+<circle cx="-11.0" cy="4.4" r="4" fill="#F7F6F3"/>
+<circle cx="11.0" cy="4.4" r="4" fill="#F7F6F3"/>
+    </g>
+    
+    <!-- Code - large -->
+    <text x="300" y="440" text-anchor="middle" font-family="sans-serif" font-size="56" font-weight="800" fill="#1B2A4A" letter-spacing="8">HEXA</text>
+    
+    <!-- Name -->
+    <text x="300" y="488" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#1B2A4A">六边形战士</text>
+    
+    <!-- Tagline -->
+    <rect x="80" y="510" width="440" height="44" rx="8" fill="#1B2A4A" opacity="0.05"/>
+    <text x="300" y="538" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3A5078" font-style="italic">"没有弱点的申请者，招生官的噩梦"</text>
+    
+    <!-- Divider line -->
+    <line x1="120" y1="570" x2="480" y2="570" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Description lines -->
+
+    <text x="120" y="600" font-family="sans-serif" font-size="17" fill="#5A6A82">• 六维雷达图接近满格</text>
+    <text x="120" y="632" font-family="sans-serif" font-size="17" fill="#5A6A82">• GPA 3.9+ / SAT 1550+</text>
+    <text x="120" y="664" font-family="sans-serif" font-size="17" fill="#5A6A82">• 国家级竞赛奖项 / 学生会主席</text>
+    <text x="120" y="696" font-family="sans-serif" font-size="17" fill="#5A6A82">• 核心挑战：在完美中展现独特</text>
+    <text x="120" y="728" font-family="sans-serif" font-size="17" fill="#5A6A82">• 建议：文书展示脆弱面与成长故事</text>
+
+    <!-- Bottom accent bar -->
+    <rect x="0" y="788" width="600" height="12" fill="#C9A96E" opacity="0.7"/>
+    
+    <!-- Brand mark -->
+    <text x="300" y="750" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#3A5078" opacity="0.5">留学罗盘 · 睿顺国际</text>
+    
+  </g>
+</svg>
