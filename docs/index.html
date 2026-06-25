@@ -131,6 +131,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
 
 .footer-brand { text-align:center; padding:24px; color:var(--text-light); font-size:12px; }
 
+/* ===== WeChat Modal ===== */
+.wechat-modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center; }
+.wechat-modal-overlay.show { display:flex; }
+.wechat-modal { background:#fff; border-radius:16px; padding:32px 24px 24px; max-width:320px; width:90%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+.wechat-modal h3 { color:var(--navy); margin-bottom:8px; font-size:18px; }
+.wechat-modal .wechat-id-box { background:var(--warm-white); border-radius:8px; padding:14px; margin:16px 0; display:flex; align-items:center; justify-content:center; gap:10px; }
+.wechat-modal .wechat-id-text { font-size:16px; font-weight:700; color:var(--navy); letter-spacing:1px; }
+.wechat-modal .btn-copy { background:var(--navy); color:#fff; border:none; border-radius:6px; padding:6px 14px; font-size:13px; cursor:pointer; }
+.wechat-modal .btn-copy.copied { background:var(--green); }
+.wechat-modal .btn-close-modal { background:none; border:none; color:var(--text-light); font-size:13px; margin-top:14px; cursor:pointer; text-decoration:underline; }
+.wechat-modal .wechat-tip { font-size:12px; color:var(--text-light); margin-top:10px; }
+
 /* ===== Responsive ===== */
 @media(min-width:600px) {
   .step-container, .report-section { max-width:540px; }
@@ -427,6 +439,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
     </div>
   </div>
   <div class="footer-brand">睿顺国际 · 留学罗盘</div>
+
+  <!-- WeChat Contact Modal -->
+  <div class="wechat-modal-overlay" id="wechatModal">
+    <div class="wechat-modal">
+      <h3>添加导师微信</h3>
+      <p style="font-size:13px;color:var(--text-light);">扫码或复制微信号添加顾问进行人工复核</p>
+      <img src="qrcode.png" alt="微信二维码" style="width:160px;height:160px;border-radius:8px;margin:12px auto;display:block;">
+      <div class="wechat-id-box">
+        <span class="wechat-id-text" id="wechatIdText"></span>
+        <button class="btn-copy" id="btnCopyWechat" onclick="copyWechatId()">复制</button>
+      </div>
+      <p class="wechat-tip">复制成功后请打开微信添加好友</p>
+      <button class="btn-close-modal" onclick="closeWechatModal()">关闭</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -469,32 +496,32 @@ function getSelectedTags(containerId) {
 // ==================== STEP SUBMISSION ====================
 function submitStep(stepNum, nextStep) {
   if (stepNum === 1) {
-    store.gpa = document.getElementById('s1-gpa').value || 'skip';
-    store.curriculum = document.getElementById('s1-curriculum').value || 'skip';
-    store.test = document.getElementById('s1-test').value || 'skip';
-    store.competition = document.getElementById('s1-competition').value || 'skip';
-    store.difficulty = document.getElementById('s1-difficulty').value || 'skip';
+    store.gpa = document.getElementById('s1-gpa').value;
+    store.curriculum = document.getElementById('s1-curriculum').value;
+    store.test = document.getElementById('s1-test').value;
+    store.competition = document.getElementById('s1-competition').value;
+    store.difficulty = document.getElementById('s1-difficulty').value;
     if (!store.gpa) { alert('请选择GPA区间或跳过'); return; }
   } else if (stepNum === 2) {
     store.majors = getSelectedTags('s2-majors-select');
-    store.research = document.getElementById('s2-research').value || 'skip';
-    store.exploration = document.getElementById('s2-exploration').value || 'skip';
-    store.recommendation = document.getElementById('s2-recommendation').value || 'skip';
+    store.research = document.getElementById('s2-research').value;
+    store.exploration = document.getElementById('s2-exploration').value;
+    store.recommendation = document.getElementById('s2-recommendation').value;
     store.statement = document.getElementById('s2-statement').value || '';
     if (store.majors.length === 0) { alert('请至少选择或跳过专业方向'); return; }
   } else if (stepNum === 3) {
     store.activities = getSelectedTags('s3-activities-select');
-    store.duration = document.getElementById('s3-duration').value || 'skip';
-    store.impactDesc = document.getElementById('s3-impact-desc').value || 'skip';
-    store.leadership = document.getElementById('s3-leadership').value || 'skip';
-    store.counselor = document.getElementById('s3-counselor').value || 'skip';
+    store.duration = document.getElementById('s3-duration').value;
+    store.impactDesc = document.getElementById('s3-impact-desc').value;
+    store.leadership = document.getElementById('s3-leadership').value;
+    store.counselor = document.getElementById('s3-counselor').value;
     if (store.activities.length === 0) { alert('请至少选择或跳过活动类型'); return; }
   } else if (stepNum === 4) {
     store.story = document.getElementById('s4-story').value || '';
     store.traits = getSelectedTags('s4-traits-select');
-    store.background = document.getElementById('s4-background').value || 'skip';
-    store.language = document.getElementById('s4-language').value || 'skip';
-    store.interview = document.getElementById('s4-interview').value || 'skip';
+    store.background = document.getElementById('s4-background').value;
+    store.language = document.getElementById('s4-language').value;
+    store.interview = document.getElementById('s4-interview').value;
     if (store.traits.length === 0) { alert('请至少选择或跳过自我认知标签'); return; }
   }
   showPage('step' + nextStep);
@@ -876,9 +903,35 @@ function toggleScoring() {
   document.getElementById('scoring-body').classList.toggle('open');
 }
 
+// ==================== WECHAT CONFIG ====================
+const ADVISOR_WECHAT_ID = 'liuweiqiang0709';
+
 // ==================== CONTACT ====================
 function contactAdvisor() {
-  alert('顾问将尽快联系你。');
+  const wechatId = ADVISOR_WECHAT_ID || '请咨询工作人员获取微信号';
+  document.getElementById('wechatIdText').textContent = wechatId;
+  document.getElementById('btnCopyWechat').className = 'btn-copy';
+  document.getElementById('btnCopyWechat').textContent = '复制';
+  document.getElementById('wechatModal').classList.add('show');
+}
+
+function closeWechatModal() {
+  document.getElementById('wechatModal').classList.remove('show');
+}
+
+function copyWechatId() {
+  const text = document.getElementById('wechatIdText').textContent;
+  if (!ADVISOR_WECHAT_ID) {
+    alert('暂未配置顾问微信号，请直接联系工作人员。');
+    return;
+  }
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btnCopyWechat');
+    btn.textContent = '已复制';
+    btn.classList.add('copied');
+  }).catch(() => {
+    alert('复制失败，请手动复制微信号：' + text);
+  });
 }
 
 // ==================== SCHOOL DATA ====================
